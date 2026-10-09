@@ -291,6 +291,36 @@
       font: 500 13px "DM Mono", monospace;
     }
 
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 36px 32px;
+    }
+    .price-card.featured { border: 2px solid var(--ink); }
+    .price-card h3 { margin: 0 0 8px; font-size: 22px; letter-spacing: -.02em; }
+    .price-card .tag {
+      display: inline-block;
+      font: 500 11px "DM Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .price-card .amount { font-size: 46px; font-weight: 700; letter-spacing: -.045em; margin: 0 0 20px; }
+    .price-card .amount span { font-size: 16px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+    .price-card ul { list-style: none; margin: 0 0 28px; padding: 0; }
+    .price-card li { padding: 9px 0; border-top: 1px solid var(--soft-line); color: var(--muted); font-size: 16px; }
+    .price-card li:first-child { border-top: none; }
+    .price-card .button { width: 100%; text-align: center; box-sizing: border-box; }
+    @media (max-width: 720px) { .price-grid { grid-template-columns: 1fr; } }
+
     .memory-section { background: var(--paper-2); }
     .memory-layout {
       display: grid;
@@ -447,6 +477,42 @@
             <div class="ledger-row"><time>REUSE</time><div><strong>Open to the whole fleet</strong><span>Another connected AI can retrieve, compare, or extend it.</span></div></div>
             <div class="ledger-row"><time>RERUN</time><div><strong>Living result</strong><span>Scheduled refreshes keep durable documents current.</span></div></div>
           </div>
+        </div>
+      </section>
+
+      <section class="wrap section" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-intro">
+          <p class="label">Pricing</p>
+          <div>
+            <h2 id="pricing-title">Own the system.</h2>
+            <p>One purchase, yours to keep. Add ongoing updates if you want them.</p>
+          </div>
+        </div>
+
+        <div class="price-grid">
+          <article class="price-card featured">
+            <p class="tag">The template</p>
+            <h3>Fleetly</h3>
+            <p class="amount">$49 <span>one-time</span></p>
+            <ul>
+              <li>The complete Notion command layer</li>
+              <li>Your license key, delivered by email</li>
+              <li>Works with Grok, Claude, ChatGPT, and Muse</li>
+              <li>Free updates for 6 months</li>
+            </ul>
+            <a class="button" href="https://buy.stripe.com/5kQ8wRa6zf0s2lN4ne6Ri02">Get Fleetly</a>
+          </article>
+          <article class="price-card">
+            <p class="tag">Optional</p>
+            <h3>Membership</h3>
+            <p class="amount">$6 <span>/month</span></p>
+            <ul>
+              <li>Ongoing template updates</li>
+              <li>New skills as they are released</li>
+              <li>Cancel anytime</li>
+            </ul>
+            <a class="button alt" href="https://buy.stripe.com/dRm7sNa6zaKcgcDaLC6Ri03">Add membership</a>
+          </article>
         </div>
       </section>
 
