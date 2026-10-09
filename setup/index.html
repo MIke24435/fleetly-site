@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleetly — AI Setup</title>
+<meta name="description" content="One-time setup for onboarding an AI assistant to the Fleetly fleet.">
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 2rem 1.25rem; line-height: 1.6;
+         color: #1a1a1a; background: #fff; }
+  @media (prefers-color-scheme: dark) { body { color: #e8e8e8; background: #111; } }
+  main { max-width: 42rem; margin: 0 auto; }
+  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+  .sub { color: #666; margin-top: 0; margin-bottom: 1.5rem; }
+  @media (prefers-color-scheme: dark) { .sub { color: #999; } }
+  .setup { border: 1px solid #ddd; border-radius: 0.75rem; padding: 1.25rem 1.5rem;
+           background: #fafafa; position: relative; }
+  @media (prefers-color-scheme: dark) { .setup { border-color: #333; background: #1a1a1a; } }
+  .setup p { margin: 0.75rem 0; }
+  .setup p:first-child { margin-top: 0; }
+  .setup p:last-child { margin-bottom: 0; }
+  .copy-btn { position: absolute; top: 0.75rem; right: 0.75rem;
+              font-size: 0.85rem; padding: 0.4rem 0.8rem; border-radius: 0.5rem;
+              border: 1px solid #ccc; background: #fff; cursor: pointer; }
+  @media (prefers-color-scheme: dark) { .copy-btn { border-color: #444; background: #222; color: #e8e8e8; } }
+  .copy-btn:hover { background: #f0f0f0; }
+  @media (prefers-color-scheme: dark) { .copy-btn:hover { background: #2a2a2a; } }
+  .hint { margin-top: 1.5rem; font-size: 0.95rem; color: #555; }
+  @media (prefers-color-scheme: dark) { .hint { color: #aaa; } }
+  footer { margin-top: 3rem; font-size: 0.85rem; color: #888; text-align: center; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Fleetly — AI Setup</h1>
+  <p class="sub">One-time setup. Paste once into the AI's settings, then never again — or just tell a new AI: <em>"Read this page and follow it."</em></p>
+
+  <div class="setup" id="setup-block">
+    <button class="copy-btn" onclick="copySetup()">Copy</button>
+    <p>Find your onboarding page in the user's Notion (Fleetly &gt; Fleet Onboarding — the page with your name on it) and follow it for this and future chats.</p>
+    <p><strong>SKILL REGISTRY</strong> — Your skills are stored in the "Fleet Skills" database in Notion (under the user's "Fleetly" page), not in this chat. Columns: Skill, Trigger, Instructions, Applies to, Version, Updated. When I invoke a skill by its trigger phrase, fetch that row's Instructions fresh from the database and follow them exactly. Never rely on a remembered copy. Where instructions say [AI], use your own name.</p>
+  </div>
+
+  <p class="hint">This text is the single source of truth for onboarding. It is maintained in the Fleetly Notion template; this page always matches it.</p>
+
+  <footer><a href="/">Fleetly</a> · fleetlybots.com</footer>
+</main>
+<script>
+function copySetup() {
+  const el = document.getElementById('setup-block');
+  const text = Array.from(el.querySelectorAll('p')).map(p => p.innerText).join('\n\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+</script>
+</body>
+</html>
