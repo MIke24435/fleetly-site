@@ -71,15 +71,98 @@
           background: var(--orange-soft); border: 1px solid var(--orange); font-weight: 600; }
   footer { margin-top: 3rem; font-size: .85rem; color: var(--muted); text-align: center; }
   footer a { color: inherit; }
+  /* Checklist hub */
+  .checklist { margin: 0 0 2.5rem; }
+  .checklist h2 { font-size: 1.25rem; letter-spacing: -.02em; margin: 0 0 .25rem; }
+  .checklist .sub2 { color: var(--muted); font-size: .95rem; margin: 0 0 1rem; }
+  .progress-line { font: 500 12px/1.4 "DM Mono", monospace; letter-spacing: .06em;
+                   text-transform: uppercase; color: var(--muted); margin: 0 0 .75rem; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+  .step { display: flex; align-items: flex-start; gap: .8rem; border: 1px solid var(--line);
+          border-radius: .75rem; background: var(--panel); padding: .9rem 1rem; }
+  .step.done { border-color: var(--ok); }
+  .step.soon { opacity: .75; }
+  .step-check { flex: 0 0 auto; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+                border: 2px solid var(--line); background: transparent; cursor: pointer;
+                margin-top: .1rem; padding: 0; position: relative; }
+  .step.done .step-check { border-color: var(--ok); background: var(--ok); }
+  .step.done .step-check::after { content: ""; position: absolute; left: .45rem; top: .25rem;
+                width: .35rem; height: .65rem; border: solid #fff; border-width: 0 2px 2px 0;
+                transform: rotate(45deg); }
+  .step.soon .step-check { cursor: default; }
+  .step-body { flex: 1; min-width: 0; }
+  .step-body a { color: inherit; text-decoration: none; }
+  .step-body a:hover strong { text-decoration: underline; }
+  .step-body strong { display: block; font-size: 1rem; }
+  .step-body span.desc { display: block; font-size: .88rem; color: var(--muted); margin-top: .15rem; }
+  .badge { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+           text-transform: uppercase; color: var(--muted); border: 1px solid var(--line);
+           border-radius: 999px; padding: .15rem .6rem; margin-top: .4rem; }
+  .step.done .step-title { color: var(--ok); }
+  .reset-row { margin-top: .9rem; text-align: right; }
+  .reset-link { background: none; border: 0; padding: 0; font: inherit; font-size: .82rem;
+                color: var(--muted); text-decoration: underline; cursor: pointer; }
+  .reset-link:hover { color: var(--ink); }
+  .device-note { font-size: .8rem; color: var(--muted); margin: .5rem 0 0; }
+  #section-basic, #section-prefs { scroll-margin-top: 1rem; }
 </style>
 </head>
 <body>
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Set up Fleetly</h1>
-  <p class="sub">Fill this in once. We&rsquo;ll turn it into a block your Chief can read &mdash; no manual database entry.</p>
+  <p class="sub">Work through the checklist below. Each step generates something your Chief can read &mdash; no manual database entry.</p>
+
+  <section class="checklist" aria-label="Onboarding checklist">
+    <h2>Your onboarding checklist</h2>
+    <p class="sub2">Do these in order. Your progress is saved automatically.</p>
+    <p class="progress-line" id="progress-line">0 of 2 steps complete</p>
+    <ol class="steps">
+      <li class="step" data-section="basic">
+        <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
+        <div class="step-body">
+          <a href="#section-basic"><strong class="step-title">1. Basic Setup</strong></a>
+          <span class="desc">License key, contact info, your Chief, and AI email addresses. Generates your setup block.</span>
+        </div>
+      </li>
+      <li class="step soon" data-section="agentmail">
+        <span class="step-check" aria-hidden="true"></span>
+        <div class="step-body">
+          <strong>2. AgentMail Setup</strong>
+          <span class="desc">Connect each AI to its inbox, step by step.</span>
+          <span class="badge">Coming soon</span>
+        </div>
+      </li>
+      <li class="step soon" data-section="roster">
+        <span class="step-check" aria-hidden="true"></span>
+        <div class="step-body">
+          <strong>3. AI Fleet Roster</strong>
+          <span class="desc">Name your AIs and assign their roles.</span>
+          <span class="badge">Coming soon</span>
+        </div>
+      </li>
+      <li class="step soon" data-section="notifications">
+        <span class="step-check" aria-hidden="true"></span>
+        <div class="step-body">
+          <strong>4. Notification Preferences</strong>
+          <span class="desc">How your Chief reaches you, and when to stay quiet.</span>
+          <span class="badge">Coming soon</span>
+        </div>
+      </li>
+      <li class="step" data-section="health">
+        <button type="button" class="step-check" aria-label="Mark Health Check Config complete"></button>
+        <div class="step-body">
+          <a href="#section-prefs"><strong class="step-title">5. Health Check Config</strong></a>
+          <span class="desc">When your Chief runs its weekly health check, and which email addresses may contact it. Part of the Basic Setup form below.</span>
+        </div>
+      </li>
+    </ol>
+    <div class="reset-row"><button type="button" class="reset-link" id="reset-progress">Reset progress</button></div>
+    <p class="device-note">Progress is saved on this device only.</p>
+  </section>
 
   <form id="setup-form" novalidate>
+    <h2 id="section-basic" style="font-size:1.35rem; letter-spacing:-.02em; margin:0 0 1rem;">Step 1: Basic Setup</h2>
     <fieldset>
       <legend>License key</legend>
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
@@ -128,8 +211,8 @@
       <input type="email" id="em-muse" data-ai="Muse" placeholder="you@agentmail.to" autocomplete="off">
     </fieldset>
 
-    <fieldset>
-      <legend>Preferences</legend>
+    <fieldset id="section-prefs">
+      <legend>Preferences &mdash; Step 5: Health Check Config</legend>
       <label for="health-check">Health Check day and time
         <small>When should your Chief run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
       </label>
@@ -157,6 +240,51 @@
 </main>
 <script>
 (function () {
+  /* ---- Checklist progress (localStorage, per-device) ---- */
+  var LS_KEY = 'fleetly-onboarding-progress';
+  var COMPLETABLE = ['basic', 'health'];
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
+    catch (e) { return {}; }
+  }
+  function saveProgress(p) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(p)); } catch (e) {}
+  }
+  function renderProgress() {
+    var p = loadProgress(), doneCount = 0;
+    document.querySelectorAll('.step[data-section]').forEach(function (li) {
+      var s = li.getAttribute('data-section');
+      var done = !!p[s];
+      li.classList.toggle('done', done);
+      var btn = li.querySelector('button.step-check');
+      if (btn) btn.setAttribute('aria-label',
+        (done ? 'Mark ' + s + ' incomplete' : 'Mark ' + s + ' complete'));
+      if (done && COMPLETABLE.indexOf(s) !== -1) doneCount++;
+    });
+    var line = document.getElementById('progress-line');
+    if (line) line.textContent = doneCount + ' of ' + COMPLETABLE.length + ' steps complete';
+  }
+  function setSection(key, done) {
+    var p = loadProgress();
+    if (done) p[key] = true; else delete p[key];
+    saveProgress(p); renderProgress();
+  }
+  document.querySelectorAll('.step[data-section] button.step-check').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var li = btn.closest('.step');
+      var s = li.getAttribute('data-section');
+      var p = loadProgress();
+      setSection(s, !p[s]);
+    });
+  });
+  var resetBtn = document.getElementById('reset-progress');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    try { localStorage.removeItem(LS_KEY); } catch (e) {}
+    renderProgress();
+  });
+  renderProgress();
+
+  /* ---- Section 1 form ---- */
   var KEY_RE = /^FL-[A-HJ-NP-Z2-9]{5}-[A-HJ-NP-Z2-9]{5}$/i;
   var form = document.getElementById('setup-form');
   var licenseEl = document.getElementById('license');
@@ -208,6 +336,9 @@
     result.classList.add('show');
     result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     copyBtn.textContent = 'Copy';
+    /* Mark checklist sections complete */
+    setSection('basic', true);
+    if (healthCheck) setSection('health', true);
   });
 
   copyBtn.addEventListener('click', function () {
