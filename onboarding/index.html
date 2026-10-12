@@ -107,6 +107,15 @@
   .reset-link:hover { color: var(--ink); }
   .device-note { font-size: .8rem; color: var(--muted); margin: .5rem 0 0; }
   #section-basic, #section-prefs { scroll-margin-top: 1rem; }
+  .section-check-row { display: flex; align-items: center; gap: .7rem; margin: 0 0 .8rem; }
+  .section-check { flex: 0 0 auto; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+                   border: 2px solid var(--line); background: transparent; cursor: pointer;
+                   padding: 0; position: relative; }
+  .section-check.done { border-color: var(--ok); background: var(--ok); }
+  .section-check.done::after { content: ""; position: absolute; left: .45rem; top: .25rem;
+                   width: .35rem; height: .65rem; border: solid #fff;
+                   border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .section-check-row h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.02em; }
 </style>
 </head>
 <body>
@@ -164,7 +173,10 @@
   </section>
 
   <form id="setup-form" novalidate>
-    <h2 id="section-basic" style="font-size:1.35rem; letter-spacing:-.02em; margin:0 0 1rem;">Step 1: Basic Setup</h2>
+    <div class="section-check-row">
+      <button type="button" class="section-check" data-section="basic" aria-label="Mark Basic Setup complete"></button>
+      <h2 id="section-basic">Step 1: Basic Setup</h2>
+    </div>
     <fieldset>
       <legend>License key</legend>
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
@@ -214,8 +226,12 @@
       <input type="email" id="em-muse" data-ai="Muse" placeholder="you@agentmail.to" autocomplete="off">
     </fieldset>
 
-    <fieldset id="section-prefs">
-      <legend>Preferences &mdash; Step 5: Health Check Config</legend>
+    <div class="section-check-row" style="margin-top:1.5rem;">
+      <button type="button" class="section-check" data-section="health" aria-label="Mark Health Check Config complete"></button>
+      <h2 id="section-prefs" style="font-size:1.15rem;">Step 5: Health Check Config</h2>
+    </div>
+    <fieldset>
+      <legend>Preferences</legend>
       <label for="health-check">Health Check day and time
         <small>When should your Chief run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
       </label>
@@ -264,6 +280,14 @@
         (done ? 'Mark ' + s + ' incomplete' : 'Mark ' + s + ' complete'));
       if (done && COMPLETABLE.indexOf(s) !== -1) doneCount++;
     });
+    /* Sync section-level check buttons above each section */
+    document.querySelectorAll('button.section-check[data-section]').forEach(function (btn) {
+      var s = btn.getAttribute('data-section');
+      var done = !!p[s];
+      btn.classList.toggle('done', done);
+      btn.setAttribute('aria-label',
+        (done ? 'Mark ' + s + ' incomplete' : 'Mark ' + s + ' complete'));
+    });
     var line = document.getElementById('progress-line');
     if (line) line.textContent = doneCount + ' of ' + COMPLETABLE.length + ' steps complete';
   }
@@ -276,6 +300,13 @@
     btn.addEventListener('click', function () {
       var li = btn.closest('.step');
       var s = li.getAttribute('data-section');
+      var p = loadProgress();      setSection(s, !p[s]);
+    });
+  });
+  /* Section-level check buttons above each section heading */
+  document.querySelectorAll('button.section-check[data-section]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var s = btn.getAttribute('data-section');
       var p = loadProgress();
       setSection(s, !p[s]);
     });
