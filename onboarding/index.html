@@ -169,7 +169,7 @@
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
           <a href="#section-basic"><strong class="step-title">4. Basic Setup</strong></a>
-          <span class="desc">License key, contact info, your Chief, and AI email addresses. Generates your setup block.</span>
+          <span class="desc">License key, contact info, and your Grok Bot email for updates. Generates your setup block.</span>
         </div>
       </li>
       <li class="step soon" data-section="roster">
@@ -228,30 +228,11 @@
     </fieldset>
 
     <fieldset>
-      <legend>Your Chief</legend>
-      <p class="hint" style="margin-top:0">Which AI runs your fleet day to day? This is the one you&rsquo;ll paste the setup block into.</p>
-      <div class="radios" id="chief-radios">
-        <label class="radio-card"><input type="radio" name="chief" value="Grok Bot" checked> Grok Bot <small>recommended</small></label>
-        <label class="radio-card"><input type="radio" name="chief" value="Grok"> Grok</label>
-        <label class="radio-card"><input type="radio" name="chief" value="Claude"> Claude</label>
-        <label class="radio-card"><input type="radio" name="chief" value="ChatGPT"> ChatGPT</label>
-        <label class="radio-card"><input type="radio" name="chief" value="Muse"> Muse</label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>AI email addresses</legend>
-      <p class="hint" style="margin-top:0">Your AgentMail inbox for each AI, if you&rsquo;ve set one up. Fill in what you have &mdash; you can add the rest later.</p>
-      <label for="em-grokbot">Grok Bot</label>
-      <input type="email" id="em-grokbot" data-ai="Grok Bot" placeholder="you@agentmail.to" autocomplete="off">
-      <label for="em-grok">Grok</label>
-      <input type="email" id="em-grok" data-ai="Grok" placeholder="you@agentmail.to" autocomplete="off">
-      <label for="em-claude">Claude</label>
-      <input type="email" id="em-claude" data-ai="Claude" placeholder="you@agentmail.to" autocomplete="off">
-      <label for="em-chatgpt">ChatGPT</label>
-      <input type="email" id="em-chatgpt" data-ai="ChatGPT" placeholder="you@agentmail.to" autocomplete="off">
-      <label for="em-muse">Muse</label>
-      <input type="email" id="em-muse" data-ai="Muse" placeholder="you@agentmail.to" autocomplete="off">
+      <legend>OTA Updates Email</legend>
+      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. We&rsquo;ll send Fleetly updates here &mdash; your Chief applies them automatically.</p>
+      <label for="ota-email">Grok Bot email <span class="req">*</span></label>
+      <input type="email" id="ota-email" placeholder="you@mail.grokbot.com" autocomplete="off" required>
+      <p class="field-err" id="ota-email-err">Please enter a valid email address.</p>
     </fieldset>
 
     <div class="section-check-row" style="margin-top:1.5rem;">
@@ -430,21 +411,16 @@
     }
     licenseErr.classList.remove('show');
 
-    var chief = (document.querySelector('input[name="chief"]:checked') || {}).value || 'Grok Bot';
     var lines = ['FLEETLY SETUP', 'License key: ' + key];
     var name = val('name'), address = val('address'), email = val('email'), phone = val('phone');
     if (name) lines.push('Name: ' + name);
     if (address) lines.push('Address: ' + address);
     if (email) lines.push('Email: ' + email);
     if (phone) lines.push('Phone: ' + phone);
-    lines.push('Chief: ' + chief);
+    lines.push('Chief: Grok Bot');
 
-    var aiEmails = [];
-    document.querySelectorAll('input[data-ai]').forEach(function (inp) {
-      var v = inp.value.trim();
-      if (v) aiEmails.push('- ' + inp.getAttribute('data-ai') + ': ' + v);
-    });
-    if (aiEmails.length) { lines.push('AI emails:'); lines = lines.concat(aiEmails); }
+    var otaEmail = val('ota-email');
+    if (otaEmail) lines.push('OTA email: ' + otaEmail);
 
     var healthCheck = val('health-check');
     if (healthCheck) lines.push('Health Check: ' + healthCheck);
