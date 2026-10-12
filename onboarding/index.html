@@ -143,17 +143,31 @@
     <p class="sub2">Do these in order. Your progress is saved automatically.</p>
     <p class="progress-line" id="progress-line">0 of 2 steps complete</p>
     <ol class="steps">
+      <li class="step" data-section="duplicate">
+        <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
+        <div class="step-body">
+          <strong class="step-title">1. Duplicate the Template</strong>
+          <span class="desc">Copy the Fleetly Template into your Notion workspace. <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the template</a> and click Duplicate in the top-right.</span>
+        </div>
+      </li>
+      <li class="step" data-section="connectors">
+        <button type="button" class="step-check" aria-label="Mark Connect AI complete"></button>
+        <div class="step-body">
+          <strong class="step-title">2. Connect Your AI</strong>
+          <span class="desc">Connect your Chief AI to Notion (and any other connectors it needs). Each AI has its own settings &mdash; look for Integrations or Connectors.</span>
+        </div>
+      </li>
       <li class="step" data-section="basic">
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
-          <a href="#section-basic"><strong class="step-title">1. Basic Setup</strong></a>
+          <a href="#section-basic"><strong class="step-title">3. Basic Setup</strong></a>
           <span class="desc">License key, contact info, your Chief, and AI email addresses. Generates your setup block.</span>
         </div>
       </li>
       <li class="step soon" data-section="agentmail">
         <span class="step-check" aria-hidden="true"></span>
         <div class="step-body">
-          <strong>2. AgentMail Setup</strong>
+          <strong>4. AgentMail Setup</strong>
           <span class="desc">Connect each AI to its inbox, step by step.</span>
           <span class="badge">Coming soon</span>
         </div>
@@ -161,7 +175,7 @@
       <li class="step soon" data-section="roster">
         <span class="step-check" aria-hidden="true"></span>
         <div class="step-body">
-          <strong>3. AI Fleet Roster</strong>
+          <strong>5. AI Fleet Roster</strong>
           <span class="desc">Name your AIs and assign their roles.</span>
           <span class="badge">Coming soon</span>
         </div>
@@ -169,7 +183,7 @@
       <li class="step soon" data-section="notifications">
         <span class="step-check" aria-hidden="true"></span>
         <div class="step-body">
-          <strong>4. Notification Preferences</strong>
+          <strong>6. Notification Preferences</strong>
           <span class="desc">How your Chief reaches you, and when to stay quiet.</span>
           <span class="badge">Coming soon</span>
         </div>
@@ -177,7 +191,7 @@
       <li class="step" data-section="health">
         <button type="button" class="step-check" aria-label="Mark Health Check Config complete"></button>
         <div class="step-body">
-          <a href="#section-prefs"><strong class="step-title">5. Health Check Config</strong></a>
+          <a href="#section-prefs"><strong class="step-title">7. Health Check Config</strong></a>
           <span class="desc">When your Chief runs its weekly health check, and which email addresses may contact it. Part of the Basic Setup form below.</span>
         </div>
       </li>
@@ -189,7 +203,7 @@
   <form id="setup-form" novalidate>
     <div class="section-check-row">
       <button type="button" class="section-check" data-section="basic" aria-label="Mark Basic Setup complete"></button>
-      <h2 id="section-basic">Step 1: Basic Setup</h2>
+      <h2 id="section-basic">Step 3: Basic Setup</h2>
     </div>
     <fieldset>
       <legend>License key</legend>
@@ -242,7 +256,7 @@
 
     <div class="section-check-row" style="margin-top:1.5rem;">
       <button type="button" class="section-check" data-section="health" aria-label="Mark Health Check Config complete"></button>
-      <h2 id="section-prefs" style="font-size:1.15rem;">Step 5: Health Check Config</h2>
+      <h2 id="section-prefs" style="font-size:1.15rem;">Step 7: Health Check Config</h2>
     </div>
     <fieldset>
       <legend>Preferences</legend>
@@ -295,7 +309,7 @@
 (function () {
   /* ---- Checklist progress (localStorage, per-device) ---- */
   var LS_KEY = 'fleetly-onboarding-progress';
-  var COMPLETABLE = ['basic', 'health'];
+  var COMPLETABLE = ['duplicate', 'connectors', 'basic', 'health'];
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
     catch (e) { return {}; }
