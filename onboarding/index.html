@@ -107,6 +107,14 @@
                 color: var(--muted); text-decoration: underline; cursor: pointer; }
   .reset-link:hover { color: var(--ink); }
   .device-note { font-size: .8rem; color: var(--muted); margin: .5rem 0 0; }
+  .what-next { margin: 2.5rem 0 0; border: 1px solid var(--line); border-radius: .75rem;
+               background: var(--panel); padding: 1.25rem 1.25rem 1rem; }
+  .what-next h2 { font-size: 1.25rem; letter-spacing: -.02em; margin: 0 0 .75rem;
+                  color: var(--orange); font-weight: 800; }
+  .what-next ol { margin: 0; padding-left: 1.25rem; display: grid; gap: .6rem; }
+  .what-next li { font-size: .95rem; }
+  .what-next .support { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; }
+  .what-next .support a { color: var(--blue); }
   #section-basic, #section-prefs { scroll-margin-top: 1rem; }
   .section-check-row { display: flex; align-items: center; gap: .7rem; margin: 0 0 .8rem; }
   .section-check { flex: 0 0 auto; width: 1.6rem; height: 1.6rem; border-radius: 50%;
@@ -255,6 +263,17 @@
     </div>
     <p class="next">Paste this into your Chief&rsquo;s chat and say <strong>&ldquo;complete my setup&rdquo;</strong>. Your Chief will fill in your Fleetly Settings and AI Fleet databases.</p>
   </div>
+
+  <section class="what-next" aria-label="What happens next">
+    <h2>What happens next</h2>
+    <ol>
+      <li><strong>Paste your setup block</strong> into your Chief&rsquo;s chat and say &ldquo;complete my setup&rdquo;. Your Chief fills in your Fleetly databases.</li>
+      <li><strong>Run the smoke test.</strong> Say <em>my tasks:</em> to your Chief. If it lists your tasks, everything&rsquo;s wired up.</li>
+      <li><strong>Connect your AIs&rsquo; inboxes</strong> using the <em>email setup:</em> skill &mdash; your Chief will walk you through each one.</li>
+      <li><strong>Start using your fleet.</strong> Say <em>help:</em> anytime to see what your AIs can do.</li>
+    </ol>
+    <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
+  </section>
 
   <footer><a href="/">Fleetly</a> &middot; fleetlybots.com</footer>
 </main>
