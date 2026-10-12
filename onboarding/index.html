@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Fleetly — Setup</title>
+<meta name="description" content="One form, one paste. Fill in your Fleetly details and get a setup block your Chief can read.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+  :root {
+    color-scheme: light dark;
+    --paper: #f7f8f3; --panel: #ffffff; --ink: #11130f; --muted: #555d54;
+    --line: #c9cec3; --orange: #ef654c; --orange-soft: #fde9e4; --blue: #3f79dc;
+    --ok: #1e8e5a; --err: #c93a2e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0e100e; --panel: #151815; --ink: #f3f5ef; --muted: #aab2a7;
+      --line: #3a4137; --orange: #ff7b64; --orange-soft: #3a1d17; --blue: #77a6ff;
+      --ok: #4ecb8d; --err: #ff8a7a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+         font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .kicker { font: 500 12px/1.4 "DM Mono", monospace; letter-spacing: .08em;
+            text-transform: uppercase; color: var(--muted); margin: 0 0 .5rem; }
+  .kicker::before { content: ""; display: inline-block; width: 28px; height: 2px;
+                    margin: 0 10px 3px 0; background: var(--orange); vertical-align: middle; }
+  h1 { font-size: 2rem; letter-spacing: -.03em; margin: 0 0 .35rem; font-weight: 800; }
+  .sub { color: var(--muted); margin: 0 0 2rem; }
+  fieldset { border: 1px solid var(--line); border-radius: .75rem; background: var(--panel);
+             padding: 1.25rem 1.25rem 1rem; margin: 0 0 1.25rem; }
+  legend { font-weight: 700; padding: 0 .5rem; }
+  label { display: block; font-size: .9rem; font-weight: 600; margin: .9rem 0 .3rem; }
+  label small { display: block; font-weight: 400; color: var(--muted); margin-top: .15rem; }
+  input[type="text"], input[type="email"], input[type="tel"], textarea {
+    width: 100%; font: inherit; padding: .65rem .8rem; border-radius: .5rem;
+    border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
+  input:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
+  textarea { resize: vertical; min-height: 3.5rem; }
+  .req { color: var(--orange); font-weight: 700; }
+  .field-err { color: var(--err); font-size: .85rem; margin: .3rem 0 0; display: none; }
+  .field-err.show { display: block; }
+  .hint { font-size: .85rem; color: var(--muted); margin: .3rem 0 0; }
+  .radios { display: grid; gap: .5rem; margin-top: .75rem; }
+  .radio-card { display: flex; align-items: center; gap: .7rem; border: 1px solid var(--line);
+                border-radius: .6rem; padding: .7rem .9rem; cursor: pointer; font-weight: 600; }
+  .radio-card input { accent-color: var(--orange); width: 1.1rem; height: 1.1rem; }
+  .radio-card:has(input:checked) { border-color: var(--orange); background: var(--orange-soft); }
+  .radio-card small { font-weight: 400; color: var(--muted); margin-left: auto; }
+  .btn { display: inline-block; font: inherit; font-weight: 700; cursor: pointer;
+         background: var(--orange); color: #fff; border: 0; border-radius: .6rem;
+         padding: .85rem 1.75rem; font-size: 1.05rem; margin-top: .5rem; }
+  .btn:hover { filter: brightness(1.06); }
+  #result { display: none; margin-top: 2rem; }
+  #result.show { display: block; }
+  .block-wrap { position: relative; border: 1px solid var(--line); border-radius: .75rem;
+                background: var(--panel); padding: 1.25rem 1.25rem 1rem; }
+  .block-wrap pre { font-family: "DM Mono", monospace; font-size: .85rem; white-space: pre-wrap;
+                    word-break: break-word; margin: 0; }
+  .copy-btn { position: absolute; top: .75rem; right: .75rem; font-size: .85rem;
+              font-weight: 600; padding: .45rem .9rem; border-radius: .5rem;
+              border: 1px solid var(--line); background: var(--paper); color: var(--ink);
+              cursor: pointer; }
+  .copy-btn:hover { border-color: var(--orange); }
+  .next { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: .75rem;
+          background: var(--orange-soft); border: 1px solid var(--orange); font-weight: 600; }
+  footer { margin-top: 3rem; font-size: .85rem; color: var(--muted); text-align: center; }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">Fleetly</p>
+  <h1>Set up Fleetly</h1>
+  <p class="sub">Fill this in once. We&rsquo;ll turn it into a block your Chief can read &mdash; no manual database entry.</p>
+
+  <form id="setup-form" novalidate>
+    <fieldset>
+      <legend>License key</legend>
+      <label for="license">Your Fleetly license key <span class="req">*</span></label>
+      <input type="text" id="license" name="license" autocomplete="off" spellcheck="false"
+             placeholder="FL-XXXXX-XXXXX" required>
+      <p class="hint">From your purchase receipt email. Looks like FL- followed by two groups of 5 letters/numbers.</p>
+      <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Contact info</legend>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" autocomplete="name">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" autocomplete="street-address">
+    </fieldset>
+
+    <fieldset>
+      <legend>Your Chief</legend>
+      <p class="hint" style="margin-top:0">Which AI runs your fleet day to day? This is the one you&rsquo;ll paste the setup block into.</p>
+      <div class="radios" id="chief-radios">
+        <label class="radio-card"><input type="radio" name="chief" value="Grok Bot" checked> Grok Bot <small>recommended</small></label>
+        <label class="radio-card"><input type="radio" name="chief" value="Grok"> Grok</label>
+        <label class="radio-card"><input type="radio" name="chief" value="Claude"> Claude</label>
+        <label class="radio-card"><input type="radio" name="chief" value="ChatGPT"> ChatGPT</label>
+        <label class="radio-card"><input type="radio" name="chief" value="Muse"> Muse</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>AI email addresses</legend>
+      <p class="hint" style="margin-top:0">Your AgentMail inbox for each AI, if you&rsquo;ve set one up. Fill in what you have &mdash; you can add the rest later.</p>
+      <label for="em-grokbot">Grok Bot</label>
+      <input type="email" id="em-grokbot" data-ai="Grok Bot" placeholder="you@agentmail.to" autocomplete="off">
+      <label for="em-grok">Grok</label>
+      <input type="email" id="em-grok" data-ai="Grok" placeholder="you@agentmail.to" autocomplete="off">
+      <label for="em-claude">Claude</label>
+      <input type="email" id="em-claude" data-ai="Claude" placeholder="you@agentmail.to" autocomplete="off">
+      <label for="em-chatgpt">ChatGPT</label>
+      <input type="email" id="em-chatgpt" data-ai="ChatGPT" placeholder="you@agentmail.to" autocomplete="off">
+      <label for="em-muse">Muse</label>
+      <input type="email" id="em-muse" data-ai="Muse" placeholder="you@agentmail.to" autocomplete="off">
+    </fieldset>
+
+    <fieldset>
+      <legend>Preferences</legend>
+      <label for="health-check">Health Check day and time
+        <small>When should your Chief run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
+      </label>
+      <input type="text" id="health-check" name="health-check" placeholder="Sundays at 8am" autocomplete="off">
+      <label for="allowed-emails">Other email addresses allowed to email your Chief
+        <small>One per line. Your Chief will only act on mail from these addresses plus your own.</small>
+      </label>
+      <textarea id="allowed-emails" name="allowed-emails" rows="3" autocomplete="off"
+                placeholder="someone@example.com"></textarea>
+    </fieldset>
+
+    <button type="submit" class="btn">Generate my setup block</button>
+  </form>
+
+  <div id="result">
+    <h2 style="font-size:1.35rem; letter-spacing:-.02em;">Your setup block</h2>
+    <div class="block-wrap">
+      <button class="copy-btn" id="copy-btn">Copy</button>
+      <pre id="setup-block"></pre>
+    </div>
+    <p class="next">Paste this into your Chief&rsquo;s chat and say <strong>&ldquo;complete my setup&rdquo;</strong>. Your Chief will fill in your Fleetly Settings and AI Fleet databases.</p>
+  </div>
+
+  <footer><a href="/">Fleetly</a> &middot; fleetlybots.com</footer>
+</main>
+<script>
+(function () {
+  var KEY_RE = /^FL-[A-HJ-NP-Z2-9]{5}-[A-HJ-NP-Z2-9]{5}$/i;
+  var form = document.getElementById('setup-form');
+  var licenseEl = document.getElementById('license');
+  var licenseErr = document.getElementById('license-err');
+  var result = document.getElementById('result');
+  var block = document.getElementById('setup-block');
+  var copyBtn = document.getElementById('copy-btn');
+
+  function val(id) { return document.getElementById(id).value.trim(); }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var key = val('license').toUpperCase();
+    licenseEl.value = key;
+    if (!KEY_RE.test(key)) {
+      licenseErr.classList.add('show');
+      licenseEl.focus();
+      return;
+    }
+    licenseErr.classList.remove('show');
+
+    var chief = (document.querySelector('input[name="chief"]:checked') || {}).value || 'Grok Bot';
+    var lines = ['FLEETLY SETUP', 'License key: ' + key];
+    var name = val('name'), address = val('address'), email = val('email'), phone = val('phone');
+    if (name) lines.push('Name: ' + name);
+    if (address) lines.push('Address: ' + address);
+    if (email) lines.push('Email: ' + email);
+    if (phone) lines.push('Phone: ' + phone);
+    lines.push('Chief: ' + chief);
+
+    var aiEmails = [];
+    document.querySelectorAll('input[data-ai]').forEach(function (inp) {
+      var v = inp.value.trim();
+      if (v) aiEmails.push('- ' + inp.getAttribute('data-ai') + ': ' + v);
+    });
+    if (aiEmails.length) { lines.push('AI emails:'); lines = lines.concat(aiEmails); }
+
+    var healthCheck = val('health-check');
+    if (healthCheck) lines.push('Health Check: ' + healthCheck);
+
+    var allowedRaw = document.getElementById('allowed-emails').value;
+    var allowed = allowedRaw.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    if (allowed.length) {
+      lines.push('Allowed sender emails:');
+      allowed.forEach(function (a) { lines.push('- ' + a); });
+    }
+
+    block.textContent = lines.join('\n');
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    copyBtn.textContent = 'Copy';
+  });
+
+  copyBtn.addEventListener('click', function () {
+    var text = block.textContent;
+    function done() {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta); done();
+    }
+  });
+})();
+</script>
+</body>
+</html>
