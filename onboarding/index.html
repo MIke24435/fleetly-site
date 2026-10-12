@@ -151,6 +151,13 @@
     <p class="sub2">Do these in order. Your progress is saved automatically.</p>
     <p class="progress-line" id="progress-line">0 of 3 steps complete</p>
     <ol class="steps">
+      <li class="step" data-section="notion">
+        <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
+        <div class="step-body">
+          <strong class="step-title">Step 0: Connect Notion</strong>
+          <span class="desc">Create a free Notion account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you don't have one. You'll duplicate the Fleetly template into it next.</span>
+        </div>
+      </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
@@ -264,7 +271,7 @@
 (function () {
   /* ---- Checklist progress (localStorage, per-device) ---- */
   var LS_KEY = 'fleetly-onboarding-progress';
-  var COMPLETABLE = ['duplicate', 'bot', 'basic'];
+  var COMPLETABLE = ['notion', 'duplicate', 'bot', 'basic'];
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
     catch (e) { return {}; }
