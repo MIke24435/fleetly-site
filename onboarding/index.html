@@ -45,6 +45,8 @@
   .req { color: var(--orange); font-weight: 700; }
   .field-err { color: var(--err); font-size: .85rem; margin: .3rem 0 0; display: none; }
   .field-err.show { display: block; }
+  .field-ok { color: var(--ok); font-size: .85rem; font-weight: 600; margin: .3rem 0 0; display: none; }
+  .field-ok.show { display: block; }
   .hint { font-size: .85rem; color: var(--muted); margin: .3rem 0 0; }
   .radios { display: grid; gap: .5rem; margin-top: .75rem; }
   .radio-card { display: flex; align-items: center; gap: .7rem; border: 1px solid var(--line);
@@ -170,6 +172,7 @@
              placeholder="FL-XXXXX-XXXXX" required>
       <p class="hint">From your purchase receipt email. Looks like FL- followed by two groups of 5 letters/numbers.</p>
       <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
+      <p class="field-ok" id="license-ok">&#10003; Key format looks good.</p>
     </fieldset>
 
     <fieldset>
@@ -292,6 +295,48 @@
   var result = document.getElementById('result');
   var block = document.getElementById('setup-block');
   var copyBtn = document.getElementById('copy-btn');
+
+  /* Inline key validation on blur.
+     Optional server-side check: null = format-only for now.
+     When the API ships, set to e.g. 'https://api.fleetlybots.com/v1/license/validate' */
+  var LICENSE_API_URL = null;
+  var licenseOk = document.getElementById('license-ok');
+  var LICENSE_ERR_DEFAULT = licenseErr.innerHTML;
+
+  function showKeyOk() {
+    licenseErr.classList.remove('show');
+    licenseOk.classList.add('show');
+  }
+  function showKeyErr(msg) {
+    licenseOk.classList.remove('show');
+    licenseErr.innerHTML = msg || LICENSE_ERR_DEFAULT;
+    licenseErr.classList.add('show');
+  }
+  function checkKeyWithApi(key) {
+    if (!LICENSE_API_URL) { showKeyOk(); return; } /* format-only for now */
+    fetch(LICENSE_API_URL + '?key=' + encodeURIComponent(key))
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d && d.ok) showKeyOk();
+        else showKeyErr('That key wasn\u2019t recognized. Check your purchase receipt email.');
+      })
+      .catch(function () { showKeyOk(); }); /* API down -> fall back to format-only */
+  }
+  licenseEl.addEventListener('blur', function () {
+    var key = licenseEl.value.trim().toUpperCase();
+    licenseErr.innerHTML = LICENSE_ERR_DEFAULT;
+    if (!key) {
+      licenseErr.classList.remove('show');
+      licenseOk.classList.remove('show');
+      return;
+    }
+    licenseEl.value = key;
+    if (KEY_RE.test(key)) checkKeyWithApi(key);
+    else showKeyErr();
+  });
+  licenseEl.addEventListener('input', function () {
+    licenseOk.classList.remove('show');
+  });
 
   function val(id) { return document.getElementById(id).value.trim(); }
 
