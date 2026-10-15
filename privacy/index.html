@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Fleetly — Privacy</title>
+<meta name="description" content="Privacy notice for Fleetly, a Notion template and optional membership.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+  :root {
+    color-scheme: light dark;
+    --paper: #f7f8f3; --panel: #ffffff; --ink: #11130f; --muted: #555d54;
+    --line: #c9cec3; --orange: #ef654c; --orange-soft: #fde9e4; --blue: #3f79dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0e100e; --panel: #151815; --ink: #f3f5ef; --muted: #aab2a7;
+      --line: #3a4137; --orange: #ff7b64; --orange-soft: #3a1d17; --blue: #77a6ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+         font-size: 16px; line-height: 1.55; }
+  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: clamp(1.7rem, 6vw, 2.1rem); letter-spacing: -.03em; margin: 0 0 .75rem; }
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 .35rem; }
+  p, li { color: var(--ink); }
+  .muted { color: var(--muted); }
+  a { color: var(--blue); }
+  footer { margin-top: 2.5rem; font-size: .9rem; color: var(--muted); text-align: center; }
+  footer p { margin: .25rem 0; }
+  footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+  footer .footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Privacy</h1>
+  <p class="muted">Last updated 15 October 2026. Applies to fleetlybots.com and onboarding.fleetlybots.com.</p>
+
+  <h2>Who we are</h2>
+  <p>Fleetly sells a digital Notion template (a one-time purchase) and an optional monthly membership. Questions about this notice: <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>.</p>
+
+  <h2>What this site collects</h2>
+  <p>The onboarding form runs in your browser. The details you type — Owner name, Email, Address, Phone, License key, Updates email, Health check, and Allowed senders — are used only to build the setup block on that page. This site does not send that form to a Fleetly server.</p>
+  <p>The onboarding checklist stores which steps you have marked complete in <code>localStorage</code> on your device. Reset progress deletes it. We do not receive it.</p>
+  <p>If you email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>, we use that message and your address to reply.</p>
+  <p>Skill update emails are sent from <a href="mailto:updates@fleetlybots.com">updates@fleetlybots.com</a> to the Grok Bot address you put in Updates email. The onboarding form pre-fills that sender under Allowed senders so Coordinator can act on those emails.</p>
+
+  <h2>Payments</h2>
+  <p>Purchases are processed by Stripe. Stripe collects payment details, the billing email, and related fraud-prevention data under <a href="https://stripe.com/privacy">Stripe’s privacy policy</a>. Fleetly does not store your card number. Stripe tells us what we need to deliver the license key, such as the email on the purchase and that the payment succeeded.</p>
+  <p>The template is $49 once. The membership is $6 per month until you cancel. Those prices are charged by Stripe.</p>
+
+  <h2>Your Notion workspace</h2>
+  <p>When you duplicate Fleetly Template 1, that copy lives in your Notion account. Tasks, skills, settings, and the license key you paste into the Settings database are stored by Notion, under Notion’s terms, not by this website.</p>
+
+  <h2>Fonts</h2>
+  <p>These pages load typefaces from Google Fonts. When your browser requests a font file, Google may receive your IP address. See <a href="https://policies.google.com/privacy">Google’s privacy policy</a>.</p>
+
+  <h2>Cookies and ads</h2>
+  <p>We do not run advertising cookies and we do not sell personal information. The only browser storage this site writes is the onboarding checklist progress described above.</p>
+
+  <h2>Children</h2>
+  <p>Fleetly is not directed at children, and we do not knowingly collect personal information from children.</p>
+
+  <h2>Changes</h2>
+  <p>If this notice changes, the updated version will be posted on this page with a new date.</p>
+
+  <footer>
+    <p><a href="https://fleetlybots.com">Fleetly</a> · fleetlybots.com</p>
+    <p class="footer-links">
+      <a href="https://fleetlybots.com/privacy">Privacy</a>
+      <a href="https://fleetlybots.com/terms">Terms</a>
+      <a href="https://x.com/FleetlyBots">X @FleetlyBots</a>
+      <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>
+    </p>
+  </footer>
+</main>
+</body>
+</html>
