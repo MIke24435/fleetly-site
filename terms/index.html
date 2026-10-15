@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Fleetly — Terms</title>
+<meta name="description" content="Draft terms for the Fleetly Notion template and optional membership.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+  :root {
+    color-scheme: light dark;
+    --paper: #f7f8f3; --panel: #ffffff; --ink: #11130f; --muted: #555d54;
+    --line: #c9cec3; --orange: #ef654c; --orange-soft: #fde9e4; --blue: #3f79dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0e100e; --panel: #151815; --ink: #f3f5ef; --muted: #aab2a7;
+      --line: #3a4137; --orange: #ff7b64; --orange-soft: #3a1d17; --blue: #77a6ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+         font-size: 16px; line-height: 1.55; }
+  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: clamp(1.7rem, 6vw, 2.1rem); letter-spacing: -.03em; margin: 0 0 .75rem; }
+  h2 { font-size: 1.15rem; margin: 1.5rem 0 .35rem; }
+  .muted { color: var(--muted); }
+  a { color: var(--blue); }
+  .draft { background: var(--orange-soft); border: 1px solid var(--orange); border-radius: .75rem;
+           padding: .9rem 1rem; margin: 0 0 1.4rem; font-weight: 650; }
+  footer { margin-top: 2.5rem; font-size: .9rem; color: var(--muted); text-align: center; }
+  footer p { margin: .25rem 0; }
+  footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+  footer .footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<main>
+  <p class="draft">Draft for the owner to review before this goes live. This is a plain-language starter, not a finished contract and not legal advice. Fill in the bracketed items before publishing.</p>
+  <h1>Terms</h1>
+  <p class="muted">Last updated 15 October 2026. These terms cover the Fleetly template and the optional membership sold at fleetlybots.com.</p>
+
+  <h2>The product</h2>
+  <p>Fleetly is a Notion template, Fleetly Template 1, plus setup instructions for an AI coordinator called Coordinator. The template is a one-time digital purchase of $49. An optional membership is $6 per month. Stripe checkout links on the site are the current prices.</p>
+  <p>Skills in the template are plain-text rows in the Skills database. Buying Fleetly does not include a separate skills API, a Fleet Skills database, or a personalised onboarding page.</p>
+
+  <h2>License</h2>
+  <p>When your payment succeeds, we email you a license key. You may duplicate the template into your own Notion workspace and use it for yourself. You may not resell the template, share the license key, or redistribute the template files.</p>
+  <p>Paste the license key into the template’s Settings database, in the License key field, as the setup guide describes.</p>
+
+  <h2>Membership</h2>
+  <p>The membership is optional and billed monthly by Stripe until you cancel. You can cancel anytime from the Stripe customer portal, or by emailing <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>. Cancellation stops future membership charges. It does not undo the one-time template purchase. The $49 template payment is not a subscription.</p>
+
+  <h2>Delivery and refunds</h2>
+  <p>The product is digital. The license key is delivered by email after Stripe confirms payment. [Owner: write the refund rule here before launch. A common starting point is to offer a refund before the key is used, and to say so plainly.] Until that sentence is filled in, email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we will tell you the current policy.</p>
+
+  <h2>Other services you connect</h2>
+  <p>Notion, Stripe, and the AI accounts you connect (Grok, Claude, ChatGPT, Muse, Gemini, Home assistant, and Coordinator) are third-party services. Their own terms and prices apply to those accounts. A $30/month SuperGrok subscription, if you use one, is billed by xAI, not by Fleetly. Fleetly does not guarantee that a third-party AI or connector will keep working the same way.</p>
+
+  <h2>Acceptable use</h2>
+  <p>Don’t use Fleetly to break the law, to send mail the recipient did not agree to receive, or to interfere with someone else’s account. You are responsible for what you ask your AIs to do and for the content you store in your Notion workspace.</p>
+
+  <h2>Disclaimer</h2>
+  <p>The template and membership are provided as-is. We do not promise uninterrupted access, a particular business result, or that every AI in the lineup will be available on a free tier. [Owner: have a lawyer check this disclaimer before launch.]</p>
+
+  <h2>Liability</h2>
+  <p>[Owner: set a liability cap before launch. A common starter is to limit liability to the amount you paid Fleetly in the 12 months before the claim, and to exclude indirect damages to the extent the law allows.]</p>
+
+  <h2>Governing law</h2>
+  <p>[Owner: name the state or country whose law applies, and where disputes are handled.]</p>
+
+  <h2>Contact</h2>
+  <p>Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>. On X: <a href="https://x.com/FleetlyBots">@FleetlyBots</a>.</p>
+
+  <footer>
+    <p><a href="https://fleetlybots.com">Fleetly</a> · fleetlybots.com</p>
+    <p class="footer-links">
+      <a href="https://fleetlybots.com/privacy">Privacy</a>
+      <a href="https://fleetlybots.com/terms">Terms</a>
+      <a href="https://x.com/FleetlyBots">X @FleetlyBots</a>
+      <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>
+    </p>
+  </footer>
+</main>
+</body>
+</html>

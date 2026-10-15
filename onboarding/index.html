@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="favicon.png">
 <title>Fleetly — Setup</title>
-<meta name="description" content="One form, one paste. Fill in your Fleetly details and get a setup block your Chief can read.">
+<meta name="description" content="One form, one paste. Fill in your Fleetly details and get a setup block your Coordinator can read.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
   :root {
@@ -138,45 +140,59 @@
                    width: .35rem; height: .65rem; border: solid #fff;
                    border-width: 0 2px 2px 0; transform: rotate(45deg); }
   .section-check-row h2 { margin: 0; font-size: 1.35rem; letter-spacing: -.02em; }
+  .tip { display: block; font-size: .88rem; color: var(--ink); margin-top: .55rem;
+         padding: .55rem .7rem; border-radius: .5rem; background: var(--orange-soft); font-weight: 600; }
+  .key-where { font-weight: 700; margin: .15rem 0 .35rem; }
+  .field-warn { color: var(--err); font-size: .85rem; font-weight: 600; margin: .45rem 0 0; display: none; }
+  .field-warn.show { display: block; }
+  .confirm-remove { display: none; align-items: flex-start; gap: .6rem; font-weight: 600;
+                    margin-top: .7rem; }
+  .confirm-remove.show { display: flex; }
+  .confirm-remove input { margin-top: .25rem; accent-color: var(--orange);
+                          width: 1.1rem; height: 1.1rem; flex: 0 0 auto; }
+  footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin: .35rem 0 0; }
+  footer .footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px;
+                            font-size: .95rem; padding: 8px 0; }
 </style>
 </head>
 <body>
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Set up Fleetly</h1>
-  <p class="sub">Work through the checklist below. Each step generates something your Chief can read &mdash; no manual database entry.</p>
+  <p class="sub">Work through the checklist below. The last step builds a setup block your Coordinator can read.</p>
 
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
     <p class="sub2">Do these in order. Your progress is saved automatically.</p>
-    <p class="progress-line" id="progress-line">0 of 3 steps complete</p>
+    <p class="progress-line" id="progress-line">0 of 4 steps complete</p>
     <ol class="steps">
       <li class="step" data-section="notion">
         <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 0: Connect Notion</strong>
           <span class="desc">Create a free Notion account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you don't have one. You'll duplicate the Fleetly template into it next.</span>
+          <span class="tip">Before the smoke test, set every Notion capability for the AI to Always available, not Ask.</span>
         </div>
       </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
           <strong class="step-title">1. Duplicate the Template</strong>
-          <span class="desc">Copy the Fleetly Template into your Notion workspace. <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the template</a> and click Duplicate in the top-right.</span>
+          <span class="desc">Copy Fleetly Template 1 into your Notion workspace. <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the template</a> and click Duplicate in the top-right. Then open the Settings database and paste your license key into the License key field.</span>
         </div>
       </li>
       <li class="step" data-section="bot">
         <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
         <div class="step-body">
           <strong class="step-title">2. Add to Grok Bot</strong>
-          <span class="desc">Add the Fleetly Coordinator to your Grok account. It becomes your Chief &mdash; the one bot that runs your fleet. <span class="badge">Template link coming soon</span></span>
+          <span class="desc">Add the Fleetly Coordinator to your Grok account. It is the one bot that runs your fleet. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
           <a href="#section-basic"><strong class="step-title">3. Basic Setup</strong></a>
-          <span class="desc">License key, contact info, and your Grok Bot email for updates. Generates your setup block.</span>
+          <span class="desc">Your details for the Settings database. Generates the setup block you paste into Coordinator.</span>
         </div>
       </li>
     </ol>
@@ -194,22 +210,25 @@
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
       <input type="text" id="license" name="license" autocomplete="off" spellcheck="false"
              placeholder="FL-XXXXX-XXXXX" required>
-      <p class="hint">From your purchase receipt email. Looks like FL- followed by two groups of 5 letters/numbers.</p>
+      <p class="key-where">Paste this key into the template’s Settings database, in the License key field.</p>
+      <p class="hint">It is in your purchase receipt email and looks like FL- followed by two groups of 5 letters or numbers.</p>
       <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
       <p class="field-ok" id="license-ok">&#10003; Key format looks good.</p>
     </fieldset>
 
     <fieldset>
       <legend>Contact info</legend>
-      <label for="name">Name</label>
+      <label for="name">Owner name
+        <small>This maps to the Settings property Owner name. Name is the Notion row title, so leave that title as it is.</small>
+      </label>
       <input type="text" id="name" name="name" autocomplete="name">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" autocomplete="email">
     </fieldset>
 
     <fieldset>
-      <legend>OTA Updates Email</legend>
-      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. We&rsquo;ll send Fleetly updates here &mdash; your Chief applies them automatically.</p>
+      <legend>Updates email</legend>
+      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. Fleetly sends updates here, and your Coordinator applies them.</p>
       <label for="ota-email">Grok Bot email <span class="req">*</span></label>
       <input type="email" id="ota-email" placeholder="you@mail.grokbot.com" autocomplete="off" required>
       <p class="field-err" id="ota-email-err">Please enter a valid email address.</p>
@@ -222,17 +241,25 @@
         <input type="text" id="address" name="address" autocomplete="street-address">
         <label for="phone">Phone</label>
         <input type="tel" id="phone" name="phone" autocomplete="tel">
-        <label for="health-check">Health Check day and time
-          <small>When should your Chief run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
+        <label for="health-check">Health check
+          <small>When should your Coordinator run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
         </label>
         <input type="text" id="health-check" name="health-check" placeholder="Sundays at 8am" autocomplete="off">
-        <label for="allowed-emails">Other email addresses allowed to email your Chief
-          <small>One per line. Your Chief will only act on mail from these addresses plus your own.</small>
-        </label>
-        <textarea id="allowed-emails" name="allowed-emails" rows="3" autocomplete="off"
-                  placeholder="someone@example.com"></textarea>
       </div>
     </details>
+
+    <fieldset>
+      <legend>Allowed senders</legend>
+      <label for="allowed-emails">Email addresses allowed to email your Coordinator
+        <small>One per line. <code>updates@fleetlybots.com</code> sends Fleetly skill update emails, so leave it in this list. Add any other addresses you want. Your Coordinator only acts on mail from these addresses plus your own.</small>
+      </label>
+      <textarea id="allowed-emails" name="allowed-emails" rows="3" autocomplete="off">updates@fleetlybots.com</textarea>
+      <p class="field-warn" id="allowed-warn">updates@fleetlybots.com sends Fleetly&rsquo;s skill update emails. Put it back, or confirm below before generating a setup block without it.</p>
+      <label class="confirm-remove" id="allowed-confirm-row" for="allowed-confirm">
+        <input type="checkbox" id="allowed-confirm">
+        <span>I want to remove updates@fleetlybots.com. Skill update emails from that address will not be accepted.</span>
+      </label>
+    </fieldset>
 
     <button type="submit" class="btn">Generate my setup block</button>
   </form>
@@ -243,14 +270,14 @@
       <button class="copy-btn" id="copy-btn">Copy</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into your Chief&rsquo;s chat and say <strong><code>complete my setup</code></strong>. Your Chief will fill in your Fleetly Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into your Coordinator&rsquo;s chat and say <strong><code>complete my setup</code></strong>. Your Coordinator will fill in your Fleetly Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
     <h2>What happens next</h2>
     <ol>
-      <li><strong>Paste your setup block</strong> into your Fleetly Bot&rsquo;s chat and say <code>complete my setup</code>. Your Chief fills in your Fleetly databases.</li>
-      <li><strong>Run the smoke test.</strong> Say <code>my tasks:</code> to your Chief. If it lists your tasks, everything&rsquo;s wired up.</li>
+      <li><strong>Paste your setup block</strong> into your Coordinator&rsquo;s chat and say <code>complete my setup</code>. Your Coordinator fills in your Fleetly databases.</li>
+      <li><strong>Run the smoke test.</strong> Say <code>my tasks:</code> to your Coordinator. If it lists your tasks, everything&rsquo;s wired up. Do this only after every Notion capability is set to Always available.</li>
       <li><strong>Start using your fleet.</strong> Say <code>help:</code> anytime to see what your AIs can do.</li>
     </ol>
     <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
@@ -259,16 +286,50 @@
   <section class="what-next" aria-label="Key documents">
     <h2>Key documents</h2>
     <ul class="doc-links">
-      <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Fleetly Template</a> &mdash; duplicate this into your Notion to get started.</li>
-      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; step-by-step setup instructions.</li>
+      <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Fleetly Template 1</a> &mdash; duplicate this into your Notion to get started.</li>
+      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; duplicate the template, add your license key, then paste the setup block into Coordinator.</li>
       <li><a href="mailto:fleetlybots@gmail.com">Support</a> &mdash; email us anytime.</li>
     </ul>
   </section>
 
-  <footer><a href="/">Fleetly</a> &middot; fleetlybots.com</footer>
+  <footer>
+    <p><a href="https://fleetlybots.com">Fleetly</a> &middot; fleetlybots.com</p>
+    <p class="footer-links">
+      <a href="https://fleetlybots.com/privacy">Privacy</a>
+      <a href="https://fleetlybots.com/terms">Terms</a>
+      <a href="https://x.com/FleetlyBots">X @FleetlyBots</a>
+      <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>
+    </p>
+  </footer>
 </main>
 <script>
 (function () {
+  /* OWNER: paste the real Grok Bot template URL here.
+     This is the only place to set it. Leave the placeholder until you have the link.
+     There is no Grok Bot template URL anywhere else in this repo. */
+  var GROK_BOT_TEMPLATE_URL = "PASTE_GROK_BOT_TEMPLATE_URL";
+  var UPDATES_SENDER = "updates@fleetlybots.com";
+
+  var templateSlot = document.getElementById("grok-template-slot");
+  if (templateSlot) {
+    var templateUrl = (GROK_BOT_TEMPLATE_URL || "").trim();
+    var templateReady = /^https?:\/\/\S+$/.test(templateUrl) && templateUrl.indexOf("PASTE_GROK_BOT_TEMPLATE_URL") === -1;
+    if (templateReady) {
+      var templateLink = document.createElement("a");
+      templateLink.href = templateUrl;
+      templateLink.target = "_blank";
+      templateLink.rel = "noopener noreferrer";
+      templateLink.style.color = "var(--blue)";
+      templateLink.textContent = "Open the Grok Bot template";
+      templateSlot.appendChild(templateLink);
+    } else {
+      var templateBadge = document.createElement("span");
+      templateBadge.className = "badge";
+      templateBadge.textContent = "Placeholder — set GROK_BOT_TEMPLATE_URL in this page";
+      templateSlot.appendChild(templateBadge);
+    }
+  }
+
   /* ---- Checklist progress (localStorage, per-device) ---- */
   var LS_KEY = 'fleetly-onboarding-progress';
   var COMPLETABLE = ['notion', 'duplicate', 'bot', 'basic'];
@@ -381,6 +442,37 @@
 
   function val(id) { return document.getElementById(id).value.trim(); }
 
+  var allowedEl = document.getElementById('allowed-emails');
+  var allowedWarn = document.getElementById('allowed-warn');
+  var allowedConfirmRow = document.getElementById('allowed-confirm-row');
+  var allowedConfirm = document.getElementById('allowed-confirm');
+
+  function allowedList() {
+    return allowedEl.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function hasUpdatesSender(list) {
+    return list.some(function (a) { return a.toLowerCase() === UPDATES_SENDER; });
+  }
+  function normalizedAllowed(list) {
+    var out = [];
+    var seen = false;
+    list.forEach(function (a) {
+      if (a.toLowerCase() === UPDATES_SENDER) {
+        if (!seen) { out.push(UPDATES_SENDER); seen = true; }
+      } else {
+        out.push(a);
+      }
+    });
+    return out;
+  }
+  function syncAllowedWarning() {
+    var missing = !hasUpdatesSender(allowedList());
+    allowedWarn.classList.toggle('show', missing);
+    allowedConfirmRow.classList.toggle('show', missing);
+    if (!missing) allowedConfirm.checked = false;
+  }
+  allowedEl.addEventListener('input', syncAllowedWarning);
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var key = val('license').toUpperCase();
@@ -392,26 +484,35 @@
     }
     licenseErr.classList.remove('show');
 
-    var lines = ['FLEETLY SETUP', 'License key: ' + key];
-    var name = val('name'), address = val('address'), email = val('email'), phone = val('phone');
-    if (name) lines.push('Name: ' + name);
-    if (address) lines.push('Address: ' + address);
-    if (email) lines.push('Email: ' + email);
-    if (phone) lines.push('Phone: ' + phone);
-    lines.push('Chief: Grok Bot');
-
-    var otaEmail = val('ota-email');
-    if (otaEmail) lines.push('OTA email: ' + otaEmail);
-
-    var healthCheck = val('health-check');
-    if (healthCheck) lines.push('Health Check: ' + healthCheck);
-
-    var allowedRaw = document.getElementById('allowed-emails').value;
-    var allowed = allowedRaw.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-    if (allowed.length) {
-      lines.push('Allowed sender emails:');
-      allowed.forEach(function (a) { lines.push('- ' + a); });
+    var otaEl = document.getElementById('ota-email');
+    var otaErr = document.getElementById('ota-email-err');
+    var otaEmail = otaEl.value.trim();
+    if (!otaEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(otaEmail)) {
+      otaErr.classList.add('show');
+      otaEl.focus();
+      return;
     }
+    otaErr.classList.remove('show');
+
+    var allowed = normalizedAllowed(allowedList());
+    if (!hasUpdatesSender(allowed) && !allowedConfirm.checked) {
+      syncAllowedWarning();
+      allowedEl.focus();
+      return;
+    }
+
+    var lines = [
+      'FLEETLY SETUP',
+      'Owner name: ' + val('name'),
+      'Email: ' + val('email'),
+      'Address: ' + val('address'),
+      'Phone: ' + val('phone'),
+      'License key: ' + key,
+      'Updates email: ' + otaEmail,
+      'Health check: ' + val('health-check'),
+      'Allowed senders: ' + allowed.join(', '),
+      'Coordinator: Grok Bot'
+    ];
 
     block.textContent = lines.join('\n');
     result.classList.add('show');
