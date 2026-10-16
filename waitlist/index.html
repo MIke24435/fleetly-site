@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Fleetly — Join the waitlist</title>
+<meta name="description" content="Join the Fleetly waitlist. Run your AIs as one team.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+  :root {
+    color-scheme: light dark;
+    --paper: #f7f8f3; --panel: #ffffff; --ink: #11130f; --muted: #555d54;
+    --line: #c9cec3; --orange: #ef654c; --orange-soft: #fde9e4; --blue: #3f79dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0e100e; --panel: #151815; --ink: #f3f5ef; --muted: #aab2a7;
+      --line: #3a4137; --orange: #ff7b64; --orange-soft: #3a1d17; --blue: #77a6ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+         font-size: 16px; line-height: 1.55; }
+  main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: clamp(1.7rem, 6vw, 2.1rem); letter-spacing: -.03em; margin: 0 0 .75rem; }
+  p { margin: .6rem 0; }
+  .muted { color: var(--muted); }
+  .small { font-size: .9rem; color: var(--muted); }
+  a { color: var(--blue); }
+  .form-box { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.5rem; margin: 1.25rem 0; }
+  footer { margin-top: 2.5rem; font-size: .9rem; color: var(--muted); text-align: center; }
+  footer p { margin: .25rem 0; }
+  footer .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+  footer .footer-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Run your AIs as one team.</h1>
+  <p>Fleetly is a Notion template that turns the AIs you already use (Grok, Claude, ChatGPT and more) into a coordinated team, with one task list and one memory you own. It&rsquo;s launching soon, and the waitlist gets first access. Want to try it early? Say yes to the beta below.</p>
+
+  <div class="form-box">
+    <!--
+      TALLY FORM — TO BE ADDED BEFORE THIS PAGE GOES LIVE.
+      1. Create the form in Tally (tally.so) with these fields:
+         - Name (required, short text)
+         - Email (required, email)
+         - Which AIs do you use? (checkboxes: Grok / Grok Bot, ChatGPT, Claude, Gemini, Muse, Other [text])
+         - Which email provider? (single choice: Gmail, Outlook / Microsoft 365, iCloud, Yahoo, Proton, Custom domain, Other)
+         - Interested in beta (Nov 1–14)? (Yes / No)
+         - Conditional if Yes: Can you give about 2 weeks of light use and honest feedback, Nov 1–14? (Yes / Not sure)
+         - X handle (optional, short text)
+      2. Set the Tally confirmation message to:
+         "You're on the list. Thanks, {Name}. You'll hear from us first when Fleetly opens. If you said yes to the beta, we're choosing a small group of 5–10 testers by Oct 31 and will email you if you're a fit. Questions? fleetlybots@gmail.com"
+      3. In Tally, connect the form to the Notion Beta Testers database (Integrations → Notion):
+         Name → Name (title) · Email → Email · X handle → X handle ·
+         AIs used → AIs used · Email provider → Email provider ·
+         Beta interest → Beta interest · Available Nov 1–14 → Available Nov 1–14 ·
+         Source = "Waitlist form" · Status = "Spotted"
+      4. Replace this comment block with the Tally embed snippet Tally gives you
+         (a <script> + <iframe>, or a plain link button to the Tally form URL).
+      Do NOT use the old Google Form (ToS-flagged). This page must not go live
+      with the placeholder still in place.
+    -->
+    <p><strong>Signup form goes here.</strong> The Tally embed is added in the step above before this page goes live.</p>
+  </div>
+
+  <p class="small">We&rsquo;ll only use this to email you about Fleetly&rsquo;s beta and launch. No spam, and you can unsubscribe anytime.</p>
+
+  <footer>
+    <p><a href="https://fleetlybots.com">Fleetly</a> &middot; fleetlybots.com</p>
+    <p class="footer-links">
+      <a href="https://fleetlybots.com/privacy">Privacy</a>
+      <a href="https://fleetlybots.com/terms">Terms</a>
+      <a href="https://x.com/FleetlyBots">X @FleetlyBots</a>
+      <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>
+    </p>
+  </footer>
+</main>
+</body>
+</html>
