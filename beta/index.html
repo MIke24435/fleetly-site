@@ -82,42 +82,9 @@ footer{color:#71717a;font-size:13px;text-align:center;padding:0 0 32px}
 
 <div class="final">
   <h2>Ready to run your AI team instead of babysitting it?</h2>
-  <div class="agreement">
-    <h3>Beta Tester Agreement</h3>
-    <p>By joining the Fleetly beta, you agree that:</p>
-    <ol>
-      <li>Fleetly, including its Notion template, databases, skills and written instructions, is licensed to you for your own personal or business use. It is not sold to you, and all rights stay with Fleetly.</li>
-      <li>You won't share, resell, publish or give away the template or any part of it.</li>
-      <li>You won't use Fleetly to build or sell a competing product.</li>
-      <li>Your copy is tied to your license key.</li>
-      <li>Your feedback may be used to improve Fleetly.</li>
-      <li>Fleetly may end beta access if these terms are broken.</li>
-    </ol>
-  </div>
-  <label class="agree"><input type="checkbox" id="agreebox"> I agree to the Beta Tester Agreement.</label>
-  <p class="agreemsg" id="agreemsg" hidden>Please check the box above before applying.</p>
-  <a class="btn disabled" id="applyBtn" href="https://tally.so/r/o96gKP" target="_blank" rel="noopener" aria-disabled="true">Apply for the beta</a>
+  <a class="btn" id="applyBtn" href="https://tally.so/r/o96gKP" target="_blank" rel="noopener">Apply for the beta</a>
   <div class="note">Takes about 2 minutes. No payment needed.</div>
 </div>
-<script>
-(function(){
-  var box=document.getElementById('agreebox'),
-      btn=document.getElementById('applyBtn'),
-      msg=document.getElementById('agreemsg');
-  if(!box||!btn)return;
-  function sync(){
-    var ok=box.checked;
-    btn.classList.toggle('disabled',!ok);
-    btn.setAttribute('aria-disabled',ok?'false':'true');
-    if(ok)msg.hidden=true;
-  }
-  box.addEventListener('change',sync);
-  btn.addEventListener('click',function(e){
-    if(!box.checked){e.preventDefault();msg.hidden=false;box.focus();}
-  });
-  sync();
-})();
-</script>
 
 <footer>Fleetly · Your AI team, one memory you own.<br><a href="https://fleetlybots.com/waitlist" style="color:inherit;font-size:15px">Join the waitlist →</a>
 <p style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin:10px 0 0">
