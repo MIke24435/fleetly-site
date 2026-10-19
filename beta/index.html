@@ -33,6 +33,15 @@ ul.check li:last-child{border-bottom:0}
 ul.check li:before{content:"✓";position:absolute;left:4px;top:11px;color:var(--accent2);font-weight:800}
 ul.check b{color:var(--text)}ul.check span{color:var(--muted)}
 .final{text-align:center;padding:48px 0 56px}
+.agreement{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;text-align:left;max-width:660px;margin:0 auto 22px}
+.agreement h3{margin:0 0 8px;font-size:20px}
+.agreement p{margin:0 0 8px;color:var(--muted)}
+.agreement ol{margin:0;padding-left:22px;color:var(--text);font-size:16px}
+.agreement li{margin:6px 0}
+.agree{display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;font-weight:600;margin:0 auto 16px;cursor:pointer}
+.agree input{width:20px;height:20px;accent-color:var(--accent);cursor:pointer}
+.agreemsg{color:#f0a0a0;font-size:15px;font-weight:600;margin:0 0 12px}
+.btn.disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
 footer{color:#71717a;font-size:13px;text-align:center;padding:0 0 32px}
 </style>
 </head>
@@ -76,9 +85,42 @@ footer{color:#71717a;font-size:13px;text-align:center;padding:0 0 32px}
 
 <div class="final">
   <h2>Ready to run your AI team instead of babysitting it?</h2>
-  <a class="btn" href="#apply">Apply for the beta</a>
+  <div class="agreement">
+    <h3>Beta Tester Agreement</h3>
+    <p>By joining the Fleetly beta, you agree that:</p>
+    <ol>
+      <li>Fleetly, including its Notion template, databases, skills and written instructions, is licensed to you for your own personal or business use. It is not sold to you, and all rights stay with Fleetly.</li>
+      <li>You won't share, resell, publish or give away the template or any part of it.</li>
+      <li>You won't use Fleetly to build or sell a competing product.</li>
+      <li>Your copy is tied to your license key.</li>
+      <li>Your feedback may be used to improve Fleetly.</li>
+      <li>Fleetly may end beta access if these terms are broken.</li>
+    </ol>
+  </div>
+  <label class="agree"><input type="checkbox" id="agreebox"> I agree to the Beta Tester Agreement.</label>
+  <p class="agreemsg" id="agreemsg" hidden>Please check the box above before applying.</p>
+  <a class="btn disabled" id="applyBtn" href="#apply" aria-disabled="true">Apply for the beta</a>
   <div class="note">Takes about 2 minutes. No payment needed.</div>
 </div>
+<script>
+(function(){
+  var box=document.getElementById('agreebox'),
+      btn=document.getElementById('applyBtn'),
+      msg=document.getElementById('agreemsg');
+  if(!box||!btn)return;
+  function sync(){
+    var ok=box.checked;
+    btn.classList.toggle('disabled',!ok);
+    btn.setAttribute('aria-disabled',ok?'false':'true');
+    if(ok)msg.hidden=true;
+  }
+  box.addEventListener('change',sync);
+  btn.addEventListener('click',function(e){
+    if(!box.checked){e.preventDefault();msg.hidden=false;box.focus();}
+  });
+  sync();
+})();
+</script>
 
 <footer>Fleetly · Your AI team, one memory you own.<br><a href="https://fleetlybots.com/waitlist" style="color:inherit;font-size:15px">Join the waitlist →</a>
 <p style="display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin:10px 0 0">
