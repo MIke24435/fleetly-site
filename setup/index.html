@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>Fleetly — Setup Guide</title>
-<meta name="description" content="How to set up Fleetly: duplicate the Notion template, add your license key, and paste the setup block into Coordinator.">
+<meta name="description" content="How to set up Fleetly: duplicate the Notion template, add your license key, and paste the setup block into Fleetly.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
   :root {
@@ -57,7 +57,7 @@
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Setup guide</h1>
-  <p class="sub">Duplicate the template, add your license key, then hand the rest to Coordinator.</p>
+  <p class="sub">Duplicate the template, add your license key, then hand the rest to Fleetly.</p>
 
   <ol class="steps">
     <li>
@@ -76,31 +76,31 @@
       Before the smoke test, set every Notion capability for the AI to <strong>Always available</strong>, not Ask.
     </li>
     <li>
-      <strong>4. Add Coordinator on Grok</strong>
-      Add the Fleetly Coordinator to your Grok account. Coordinator is the one bot that runs your fleet.
+      <strong>4. Add Fleetly on Grok</strong>
+      Add Fleetly to your Grok account. Fleetly is the bot that runs your fleet and reports to your Chief of Staff.
       <a href="https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7">Open the Grok Bot template</a>.
     </li>
     <li>
       <strong>5. Fill in the onboarding form</strong>
       The form builds a <code>FLEETLY SETUP</code> block labeled to match your Settings properties:
-      Owner name, Email, Address, Phone, License key, Updates email, Health check, and Allowed senders.
+      Owner name, Email, Address, Phone, License key, Updates email, Health check, Allowed senders, Chief of Staff, Timezone, and Field AIs.
       Allowed senders starts with <code>updates@fleetlybots.com</code>, the address Fleetly uses for skill update emails. Add any other addresses you want. Leave that one in the list unless you mean to block those emails.
       <a class="btn" href="https://onboarding.fleetlybots.com">Open the onboarding form</a>
     </li>
     <li>
-      <strong>6. Paste the block into Coordinator</strong>
-      Paste the generated block into your Coordinator’s chat and say <code>complete my setup</code>.
-      Coordinator fills in your Settings from that block.
+      <strong>6. Paste the block into Fleetly</strong>
+      Paste the generated block into Fleetly’s chat and say <code>complete my setup</code>.
+      Fleetly fills in your Settings from that block.
     </li>
     <li>
       <strong>7. Smoke test</strong>
-      Say <code>my tasks:</code> to Coordinator. If it lists your tasks, setup is done.
+      Say <code>my tasks:</code> to Fleetly. If it lists your tasks, setup is done.
       Say <code>help:</code> anytime to see what your AIs can do.
     </li>
   </ol>
 
   <h2>Skills</h2>
-  <p>Skills are plain-text rows in the template’s <strong>Skills</strong> database. They are already in the template you duplicated. Coordinator reads those rows. There is no Fleet Skills database, no personalised Fleet Onboarding page, and no step that fetches skills from an API or a URL.</p>
+  <p>Skills are plain-text rows in the template’s <strong>Skills</strong> database. They are already in the template you duplicated. Fleetly reads those rows. There is no Fleet Skills database, no personalised Fleet Onboarding page, and no step that fetches skills from an API or a URL.</p>
 
   <h2>AI lineup</h2>
   <p>The template’s lineup is:</p>
@@ -109,8 +109,8 @@
     <li>Claude</li>
     <li>ChatGPT</li>
     <li>Muse</li>
-    <li>Home assistant</li>
-    <li>Coordinator</li>
+    <li>Chief of Staff (your primary bot)</li>
+    <li>Fleetly</li>
   </ul>
 
   <p class="note">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>.</p>

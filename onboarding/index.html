@@ -7,7 +7,7 @@
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="favicon.png">
 <title>Fleetly — Setup</title>
-<meta name="description" content="One form, one paste. Fill in your Fleetly details and get a setup block your Coordinator can read.">
+<meta name="description" content="One form, one paste. Fill in your Fleetly details and get a setup block Fleetly can read.">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
   :root {
@@ -159,7 +159,7 @@
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Set up Fleetly</h1>
-  <p class="sub">Work through the checklist below. The last step builds a setup block your Coordinator can read.</p>
+  <p class="sub">Work through the checklist below. The last step builds a setup block Fleetly can read.</p>
 
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
@@ -185,14 +185,14 @@
         <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
         <div class="step-body">
           <strong class="step-title">2. Add to Grok Bot</strong>
-          <span class="desc">Add the Fleetly Coordinator to your Grok account. It is the one bot that runs your fleet. <span id="grok-template-slot"></span></span>
+          <span class="desc">Add Fleetly to your Grok account. Fleetly is the bot that runs your fleet and reports to your Chief of Staff. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
           <a href="#section-basic"><strong class="step-title">3. Basic Setup</strong></a>
-          <span class="desc">Your details for the Settings database. Generates the setup block you paste into Coordinator.</span>
+          <span class="desc">Your details for the Settings database. Generates the setup block you paste into Fleetly.</span>
         </div>
       </li>
     </ol>
@@ -227,8 +227,16 @@
     </fieldset>
 
     <fieldset>
+      <legend>Chief of Staff (optional)</legend>
+      <label for="chief-name">Chief of Staff name
+        <small>The name of your primary bot, if you have one. Leave blank to talk to Fleetly directly.</small>
+      </label>
+      <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief">
+    </fieldset>
+
+    <fieldset>
       <legend>Updates email</legend>
-      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. Fleetly sends updates here, and your Coordinator applies them.</p>
+      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. Updates arrive here, and Fleetly applies them.</p>
       <label for="ota-email">Grok Bot email <span class="req">*</span></label>
       <input type="email" id="ota-email" placeholder="you@mail.grokbot.com" autocomplete="off" required>
       <p class="field-err" id="ota-email-err">Please enter a valid email address.</p>
@@ -242,16 +250,29 @@
         <label for="phone">Phone</label>
         <input type="tel" id="phone" name="phone" autocomplete="tel">
         <label for="health-check">Health check
-          <small>When should your Coordinator run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
+          <small>When should Fleetly run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
         </label>
         <input type="text" id="health-check" name="health-check" placeholder="Sundays at 8am" autocomplete="off">
+        <label for="timezone">Timezone
+          <small>Used for the health check schedule. e.g. America/New_York</small>
+        </label>
+        <input type="text" id="timezone" name="timezone" placeholder="America/New_York" autocomplete="off">
       </div>
     </details>
 
     <fieldset>
+      <legend>Field AIs you plan to use</legend>
+      <p class="hint" style="margin-top:0">Check the ones you plan to connect. Each AI connects separately and verifies itself.</p>
+      <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
+      <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
+      <label><input type="checkbox" name="field-ai" value="Grok"> Grok</label>
+      <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
+    </fieldset>
+
+    <fieldset>
       <legend>Allowed senders</legend>
-      <label for="allowed-emails">Email addresses allowed to email your Coordinator
-        <small>One per line. <code>updates@fleetlybots.com</code> sends Fleetly skill update emails, so leave it in this list. Add any other addresses you want. Your Coordinator only acts on mail from these addresses plus your own.</small>
+      <label for="allowed-emails">Email addresses allowed to email Fleetly
+        <small>One per line. <code>updates@fleetlybots.com</code> sends Fleetly skill update emails, so leave it in this list. Add any other addresses you want. Fleetly only acts on mail from these addresses plus your own.</small>
       </label>
       <textarea id="allowed-emails" name="allowed-emails" rows="3" autocomplete="off">updates@fleetlybots.com</textarea>
       <p class="field-warn" id="allowed-warn">updates@fleetlybots.com sends Fleetly&rsquo;s skill update emails. Put it back, or confirm below before generating a setup block without it.</p>
@@ -270,14 +291,14 @@
       <button class="copy-btn" id="copy-btn">Copy</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into your Coordinator&rsquo;s chat and say <strong><code>complete my setup</code></strong>. Your Coordinator will fill in your Fleetly Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into Fleetly&rsquo;s chat and say <strong><code>complete my setup</code></strong>. Fleetly will fill in your Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
     <h2>What happens next</h2>
     <ol>
-      <li><strong>Paste your setup block</strong> into your Coordinator&rsquo;s chat and say <code>complete my setup</code>. Your Coordinator fills in your Fleetly databases.</li>
-      <li><strong>Run the smoke test.</strong> Say <code>my tasks:</code> to your Coordinator. If it lists your tasks, everything&rsquo;s wired up. Do this only after every Notion capability is set to Always available.</li>
+      <li><strong>Paste your setup block</strong> into Fleetly&rsquo;s chat and say <code>complete my setup</code>. Fleetly fills in your databases.</li>
+      <li><strong>Run the smoke test.</strong> Say <code>my tasks:</code> to Fleetly. If it lists your tasks, everything&rsquo;s wired up. Do this only after every Notion capability is set to Always available.</li>
       <li><strong>Start using your fleet.</strong> Say <code>help:</code> anytime to see what your AIs can do.</li>
     </ol>
     <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
@@ -287,7 +308,7 @@
     <h2>Key documents</h2>
     <ul class="doc-links">
       <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Fleetly Template 1</a> &mdash; duplicate this into your Notion to get started.</li>
-      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; duplicate the template, add your license key, then paste the setup block into Coordinator.</li>
+      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; duplicate the template, add your license key, then paste the setup block into Fleetly.</li>
       <li><a href="mailto:fleetlybots@gmail.com">Support</a> &mdash; email us anytime.</li>
     </ul>
   </section>
@@ -500,6 +521,7 @@
       return;
     }
 
+    var fieldAIs = Array.prototype.slice.call(document.querySelectorAll('input[name="field-ai"]:checked')).map(function (c) { return c.value; });
     var lines = [
       'FLEETLY SETUP',
       'Owner name: ' + val('name'),
@@ -510,7 +532,10 @@
       'Updates email: ' + otaEmail,
       'Health check: ' + val('health-check'),
       'Allowed senders: ' + allowed.join(', '),
-      'Coordinator: Grok Bot'
+      'Chief of Staff: ' + val('chief-name'),
+      'Timezone: ' + val('timezone'),
+      'Field AIs: ' + fieldAIs.join(', '),
+      'Coordinator: Fleetly'
     ];
 
     block.textContent = lines.join('\n');
