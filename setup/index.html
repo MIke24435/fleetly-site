@@ -57,14 +57,14 @@
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Setup guide</h1>
-  <p class="sub">Duplicate the template, add your license key, then hand the rest to Fleetly.</p>
+  <p class="sub">Duplicate the Fleetly Notion Template, add your license key, then hand the rest to the Fleetly bot.</p>
 
   <ol class="steps">
     <li>
-      <strong>1. Duplicate Fleetly Notion Template</strong>
-      Create a free Notion account at <a href="https://notion.so">notion.so</a> if you need one.
-      Open <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Fleetly Notion Template</a>
-      and click Duplicate in the top-right.
+      <strong>1. Duplicate the Fleetly Notion Template</strong>
+      Sign in to Notion (create a free account at <a href="https://notion.so">notion.so</a> if you need one).
+      Open <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Open the Fleetly Notion Template</a>
+      and choose Duplicate (top right) to copy it into your workspace.
     </li>
     <li>
       <strong>2. Paste your license key</strong>
@@ -72,45 +72,45 @@
       The key arrives in your purchase receipt email and looks like <code>FL-XXXXX-XXXXX</code>.
     </li>
     <li>
-      <strong>3. Set Notion capabilities to Always available</strong>
-      Before the smoke test, set every Notion capability for the AI to <strong>Always available</strong>, not Ask.
+      <strong>3. Connect Notion to the Fleetly bot</strong>
+      In the Fleetly bot, connect Notion, choose your duplicated Fleetly Notion Template page, and set each permission to <strong>Always available</strong>, not Ask. An Ask setting can block database queries.
     </li>
     <li>
-      <strong>4. Add Fleetly on Grok</strong>
-      Add Fleetly to your Grok account. Fleetly is the bot that runs your fleet and reports to your Chief of Staff.
-      <a href="https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7">Open the Grok Bot template</a>.
+      <strong>4. Add the Fleetly bot to Grok Bot</strong>
+      Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Chief of Staff.
+      <a href="https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7">Add Fleetly to Grok Bot</a>.
     </li>
     <li>
       <strong>5. Fill in the onboarding form</strong>
       The form builds a <code>FLEETLY SETUP</code> block labeled to match your Settings properties:
-      Owner name, Email, Address, Phone, License key, Updates email, Health check, Allowed senders, Chief of Staff, Timezone, and Field AIs.
-      Allowed senders starts with <code>updates@fleetlybots.com</code>, the address Fleetly uses for skill update emails. Add any other addresses you want. Leave that one in the list unless you mean to block those emails.
+      Owner name, Email, License key, Grok Bot Email Inbox, Health check (day, time, and timezone), Coordinator name, and Field AIs.
+      Fleetly accepts mail from you and Fleetly updates. Add other addresses later in Settings. Your AIs are added when you connect them.
       <a class="btn" href="https://onboarding.fleetlybots.com">Open the onboarding form</a>
     </li>
     <li>
-      <strong>6. Paste the block into Fleetly</strong>
-      Paste the generated block into Fleetly’s chat and say <code>complete my setup</code>.
-      Fleetly fills in your Settings from that block.
+      <strong>6. Paste the block into the Fleetly bot</strong>
+      Paste the generated block into the Fleetly bot’s chat (the bot from Step 4), not into a Chief of Staff bot, and say <code>connect Fleetly:</code> (alias <code>complete my setup</code>).
+      The Fleetly bot fills in your Settings and AI Fleet databases from that block.
     </li>
     <li>
       <strong>7. Smoke test</strong>
-      Say <code>my tasks:</code> to Fleetly. If it lists your tasks, setup is done.
+      In the Fleetly bot’s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.
       Say <code>help:</code> anytime to see what your AIs can do.
     </li>
   </ol>
 
   <h2>Skills</h2>
-  <p>Skills are plain-text rows in the template’s <strong>Skills</strong> database. They are already in the template you duplicated. Fleetly reads those rows. There is no Fleet Skills database, no personalised Fleet Onboarding page, and no step that fetches skills from an API or a URL.</p>
+  <p>Skills are plain-text rows in the Fleetly Notion Template’s <strong>Skills</strong> database. They are already in the copy you duplicated. The Fleetly bot reads those rows. There is no Fleet Skills database, no personalised Fleet Onboarding page, and no step that fetches skills from an API or a URL.</p>
 
   <h2>AI lineup</h2>
-  <p>The template’s lineup is:</p>
+  <p>The Fleetly Notion Template’s lineup is:</p>
   <ul class="lineup">
-    <li>Grok</li>
+    <li>Grok Bot</li>
+    <li>Muse</li>
     <li>Claude</li>
     <li>ChatGPT</li>
-    <li>Muse</li>
     <li>Chief of Staff (your primary bot)</li>
-    <li>Fleetly</li>
+    <li>Fleetly bot</li>
   </ul>
 
   <p class="note">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a>.</p>

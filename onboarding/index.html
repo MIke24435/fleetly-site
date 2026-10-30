@@ -40,10 +40,10 @@
            letter-spacing: -.01em; color: var(--orange); }
   label { display: block; font-size: .9rem; font-weight: 600; margin: .9rem 0 .3rem; }
   label small { display: block; font-weight: 400; color: var(--muted); margin-top: .15rem; }
-  input[type="text"], input[type="email"], input[type="tel"], textarea {
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea {
     width: 100%; font: inherit; padding: .65rem .8rem; border-radius: .5rem;
     border: 1px solid var(--line); background: var(--paper); color: var(--ink); }
-  input:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
   textarea { resize: vertical; min-height: 3.5rem; }
   .req { color: var(--orange); font-weight: 700; }
   .field-err { color: var(--err); font-size: .85rem; margin: .3rem 0 0; display: none; }
@@ -159,7 +159,7 @@
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Set up Fleetly</h1>
-  <p class="sub">Work through the checklist below. The last step builds a setup block Fleetly can read.</p>
+  <p class="sub">Work through the checklist below. The last step builds a setup block the Fleetly bot can read.</p>
 
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
@@ -170,22 +170,22 @@
         <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 0: Connect Notion</strong>
-          <span class="desc">Create a free Notion account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you don't have one. You'll duplicate the Fleetly template into it next.</span>
-          <span class="tip">Before the smoke test, set every Notion capability for the AI to Always available, not Ask.</span>
+          <span class="desc">Create a free Notion account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you don't have one. You'll duplicate the Fleetly Notion Template into it next.</span>
+          <span class="tip">Before the smoke test, connect Notion to the Fleetly bot as shown in the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
         </div>
       </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
-          <strong class="step-title">1. Duplicate Fleetly Notion Template</strong>
-          <span class="desc">Open the <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">link</a>, sign in to Notion (or create a free account), click Duplicate (top right) to copy Fleetly Notion Template into your workspace, then come back here.</span>
+          <strong class="step-title">1. Duplicate the Fleetly Notion Template</strong>
+          <span class="desc">Sign in to Notion, click <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
         </div>
       </li>
       <li class="step" data-section="bot">
         <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
         <div class="step-body">
-          <strong class="step-title">2. Add to Grok Bot</strong>
-          <span class="desc">Add Fleetly to your Grok account. Fleetly is the bot that runs your fleet and reports to your Chief of Staff. <span id="grok-template-slot"></span></span>
+          <strong class="step-title">2. Add the Fleetly bot to Grok Bot</strong>
+          <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Chief of Staff. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
@@ -210,7 +210,7 @@
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
       <input type="text" id="license" name="license" autocomplete="off" spellcheck="false"
              placeholder="FL-XXXXX-XXXXX" required>
-      <p class="key-where">Paste this key into the template’s Settings database, in the License key field.</p>
+      <p class="key-where">Paste this key into the Fleetly Notion Template’s Settings database, in the License key field.</p>
       <p class="hint">It is in your purchase receipt email and looks like FL- followed by two groups of 5 letters or numbers.</p>
       <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
       <p class="field-ok" id="license-ok">&#10003; Key format looks good.</p>
@@ -218,68 +218,146 @@
 
     <fieldset>
       <legend>Contact info</legend>
-      <label for="name">Owner name
-        <small>This maps to the Settings property Owner name. Name is the Notion row title, so leave that title as it is.</small>
+      <label for="name">Owner name <span class="req">*</span>
+        <small>Your name, as you'd like Fleetly to address you.</small>
       </label>
-      <input type="text" id="name" name="name" autocomplete="name">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" autocomplete="email">
+      <input type="text" id="name" name="name" autocomplete="name" required>
+      <p class="field-err" id="name-err">Please enter your name.</p>
+      <label for="email">Email <span class="req">*</span>
+        <small>Where Fleetly sends you notices.</small>
+      </label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+      <p class="field-err" id="email-err">Please enter a valid email address.</p>
     </fieldset>
 
     <fieldset>
-      <legend>Chief of Staff (optional)</legend>
-      <label for="chief-name">Chief of Staff name
+      <legend>Coordinator name (optional)</legend>
+      <label for="chief-name">Coordinator name
         <small>The name of your primary bot, if you have one. Leave blank to talk to Fleetly directly.</small>
       </label>
       <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief">
     </fieldset>
 
     <fieldset>
-      <legend>Updates email</legend>
-      <p class="hint" style="margin-top:0">Your Grok Bot&rsquo;s email address. Updates arrive here, and Fleetly applies them.</p>
-      <label for="ota-email">Grok Bot email <span class="req">*</span></label>
+      <legend>Grok Bot Email Inbox</legend>
+      <p class="hint" style="margin-top:0">Fleetly updates and done notes arrive here. Don&rsquo;t have one yet? In Grok Bot, say: Claim an email inbox for me, and paste the address it gives you.</p>
+      <label for="ota-email">Your Fleetly bot&rsquo;s Grok Bot email address <span class="req">*</span></label>
       <input type="email" id="ota-email" placeholder="you@mail.grokbot.com" autocomplete="off" required>
       <p class="field-err" id="ota-email-err">Please enter a valid email address.</p>
     </fieldset>
 
-    <details class="optional-section">
-      <summary>Optional &mdash; address, phone, health check</summary>
-      <div class="optional-body">
-        <label for="address">Address</label>
-        <input type="text" id="address" name="address" autocomplete="street-address">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" autocomplete="tel">
-        <label for="health-check">Health check
-          <small>When should Fleetly run its weekly health check? e.g. &ldquo;Sundays at 8am&rdquo;</small>
-        </label>
-        <input type="text" id="health-check" name="health-check" placeholder="Sundays at 8am" autocomplete="off">
-        <label for="timezone">Timezone
-          <small>Used for the health check schedule. e.g. America/New_York</small>
-        </label>
-        <input type="text" id="timezone" name="timezone" placeholder="America/New_York" autocomplete="off">
-      </div>
-    </details>
-
     <fieldset>
-      <legend>Field AIs you plan to use</legend>
-      <p class="hint" style="margin-top:0">Check the ones you plan to connect. Each AI connects separately and verifies itself.</p>
-      <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
-      <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
-      <label><input type="checkbox" name="field-ai" value="Grok"> Grok</label>
-      <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
+      <legend>Health check <span class="req">*</span></legend>
+      <p class="hint" style="margin-top:0">When should the Fleetly bot run its weekly health check? Defaults to Sunday at 8:00 AM, in your browser&rsquo;s timezone.</p>
+      <label for="health-day">Day</label>
+      <select id="health-day" name="health-day">
+          <option value="Sunday" selected>Sunday</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+      </select>
+      <label for="health-time">Time</label>
+      <select id="health-time" name="health-time">
+          <option value="12:00 AM">12:00 AM</option>
+          <option value="1:00 AM">1:00 AM</option>
+          <option value="2:00 AM">2:00 AM</option>
+          <option value="3:00 AM">3:00 AM</option>
+          <option value="4:00 AM">4:00 AM</option>
+          <option value="5:00 AM">5:00 AM</option>
+          <option value="6:00 AM">6:00 AM</option>
+          <option value="7:00 AM">7:00 AM</option>
+          <option value="8:00 AM" selected>8:00 AM</option>
+          <option value="9:00 AM">9:00 AM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="11:00 AM">11:00 AM</option>
+          <option value="12:00 PM">12:00 PM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="2:00 PM">2:00 PM</option>
+          <option value="3:00 PM">3:00 PM</option>
+          <option value="4:00 PM">4:00 PM</option>
+          <option value="5:00 PM">5:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="7:00 PM">7:00 PM</option>
+          <option value="8:00 PM">8:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+          <option value="10:00 PM">10:00 PM</option>
+          <option value="11:00 PM">11:00 PM</option>
+      </select>
+      <label for="timezone">Timezone</label>
+      <select id="timezone" name="timezone">
+          <option value="America/New_York" selected>America/New_York</option>
+          <option value="America/Chicago">America/Chicago</option>
+          <option value="America/Denver">America/Denver</option>
+          <option value="America/Los_Angeles">America/Los_Angeles</option>
+          <option value="America/Anchorage">America/Anchorage</option>
+          <option value="Pacific/Honolulu">Pacific/Honolulu</option>
+          <option value="America/Toronto">America/Toronto</option>
+          <option value="America/Mexico_City">America/Mexico_City</option>
+          <option value="America/Sao_Paulo">America/Sao_Paulo</option>
+          <option value="America/Santiago">America/Santiago</option>
+          <option value="Atlantic/Reykjavik">Atlantic/Reykjavik</option>
+          <option value="Europe/London">Europe/London</option>
+          <option value="Europe/Dublin">Europe/Dublin</option>
+          <option value="Europe/Lisbon">Europe/Lisbon</option>
+          <option value="Europe/Paris">Europe/Paris</option>
+          <option value="Europe/Berlin">Europe/Berlin</option>
+          <option value="Europe/Madrid">Europe/Madrid</option>
+          <option value="Europe/Rome">Europe/Rome</option>
+          <option value="Europe/Amsterdam">Europe/Amsterdam</option>
+          <option value="Europe/Stockholm">Europe/Stockholm</option>
+          <option value="Europe/Athens">Europe/Athens</option>
+          <option value="Europe/Moscow">Europe/Moscow</option>
+          <option value="Africa/Cairo">Africa/Cairo</option>
+          <option value="Africa/Johannesburg">Africa/Johannesburg</option>
+          <option value="Asia/Dubai">Asia/Dubai</option>
+          <option value="Asia/Kolkata">Asia/Kolkata</option>
+          <option value="Asia/Singapore">Asia/Singapore</option>
+          <option value="Asia/Hong_Kong">Asia/Hong_Kong</option>
+          <option value="Asia/Shanghai">Asia/Shanghai</option>
+          <option value="Asia/Tokyo">Asia/Tokyo</option>
+          <option value="Asia/Seoul">Asia/Seoul</option>
+          <option value="Australia/Sydney">Australia/Sydney</option>
+          <option value="Australia/Melbourne">Australia/Melbourne</option>
+          <option value="Pacific/Auckland">Pacific/Auckland</option>
+          <option value="UTC">UTC</option>
+      </select>
     </fieldset>
 
     <fieldset>
-      <legend>Allowed senders</legend>
-      <label for="allowed-emails">Email addresses allowed to email Fleetly
-        <small>One per line. <code>updates@fleetlybots.com</code> sends Fleetly skill update emails, so leave it in this list. Add any other addresses you want. Fleetly only acts on mail from these addresses plus your own.</small>
-      </label>
-      <textarea id="allowed-emails" name="allowed-emails" rows="3" autocomplete="off">updates@fleetlybots.com</textarea>
-      <p class="field-warn" id="allowed-warn">updates@fleetlybots.com sends Fleetly&rsquo;s skill update emails. Put it back, or confirm below before generating a setup block without it.</p>
-      <label class="confirm-remove" id="allowed-confirm-row" for="allowed-confirm">
-        <input type="checkbox" id="allowed-confirm">
-        <span>I want to remove updates@fleetlybots.com. Skill update emails from that address will not be accepted.</span>
-      </label>
+      <legend>Field AIs you plan to use</legend>
+      <p class="hint" style="margin-top:0">Check the ones you plan to connect. After setup, say connect AI: to the Fleetly bot to connect each one.</p>
+      <div class="ai-row">
+        <label><input type="checkbox" name="field-ai" value="Grok Bot"> Grok Bot</label>
+        <label class="ai-purpose" style="display:none">What is Grok Bot for?
+          <input type="text" id="purpose-grok-bot" placeholder="What do you use it for?">
+        </label>
+      </div>
+      <div class="ai-row">
+        <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
+        <label class="ai-purpose" style="display:none">What is Muse for?
+          <input type="text" id="purpose-muse" placeholder="What do you use it for?">
+        </label>
+      </div>
+      <div class="ai-row">
+        <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
+        <label class="ai-purpose" style="display:none">What is Claude for?
+          <input type="text" id="purpose-claude" placeholder="What do you use it for?">
+        </label>
+      </div>
+      <div class="ai-row">
+        <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
+        <label class="ai-purpose" style="display:none">What is ChatGPT for?
+          <input type="text" id="purpose-chatgpt" placeholder="What do you use it for?">
+        </label>
+      </div>
+    </fieldset>
+
+<fieldset>
+      <legend>Email Fleetly accepts</legend>
+      <p style="margin:0">Fleetly accepts mail from you and Fleetly updates. Add other addresses later in Settings. Your AIs are added when you connect them.</p>
     </fieldset>
 
     <button type="submit" class="btn">Generate my setup block</button>
@@ -291,25 +369,36 @@
       <button class="copy-btn" id="copy-btn">Copy</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into Fleetly&rsquo;s chat and say <strong><code>complete my setup</code></strong>. Fleetly will fill in your Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 2), not into a Chief of Staff bot, and say <strong><code>connect Fleetly:</code></strong> (also accepted as <code>complete my setup</code>). The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
     <h2>What happens next</h2>
-    <ol>
-      <li><strong>Paste your setup block</strong> into Fleetly&rsquo;s chat and say <code>complete my setup</code>. Fleetly fills in your databases.</li>
-      <li><strong>Run the smoke test.</strong> Say <code>my tasks:</code> to Fleetly. If it lists your tasks, everything&rsquo;s wired up. Do this only after every Notion capability is set to Always available.</li>
-      <li><strong>Start using your fleet.</strong> Say <code>help:</code> anytime to see what your AIs can do.</li>
-    </ol>
+<p class="progress-line" id="wn-progress">0 of 6 complete</p>
+    <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> paste your setup block into the Fleetly bot&rsquo;s chat and say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Notion</strong> to the Fleetly bot, with permissions set as shown in the <a href="https://fleetlybots.com/setup">Setup Guide</a>.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Chief:</strong> (optional) say <code>connect Chief:</code> to the Fleetly bot.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> for each AI, and check each is marked Verified.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet</strong> with <code>help:</code>.</label></li>
+    </ul>
     <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
   </section>
 
   <section class="what-next" aria-label="Key documents">
     <h2>Key documents</h2>
-    <ul class="doc-links">
-      <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Fleetly Notion Template</a> &mdash; duplicate this into your Notion to get started.</li>
-      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; duplicate the template, add your license key, then paste the setup block into Fleetly.</li>
-      <li><a href="mailto:fleetlybots@gmail.com">Support</a> &mdash; email us anytime.</li>
+<ul class="doc-links">
+      <li><a href="https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7">Add Fleetly to Grok Bot</a> &mdash; add the Fleetly bot to Grok Bot.</li>
+      <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Open the Fleetly Notion Template</a> &mdash; duplicate this into your Notion to get started.</li>
+      <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; step-by-step help for every part of setup.</li>
+      <li><strong>Fleet Help</strong> &mdash; quick start, every trigger, and common fixes, inside your duplicated Fleetly Notion Template.</li>
+      <li><a href="https://agentmail.to/docs/get-started/agent-signup">AgentMail sign-up</a> &mdash; email inboxes for your AIs.</li>
+      <li><a href="https://x.ai">Grok Bot</a> &mdash; where the Fleetly bot lives.</li>
+      <li><a href="https://notion.so">Notion</a> &mdash; where your fleet&rsquo;s workspace lives.</li>
+      <li><a href="https://fleetlybots.com/privacy">Privacy</a></li>
+      <li><a href="https://fleetlybots.com/terms">Terms</a></li>
+      <li><a href="mailto:fleetlybots@gmail.com">Support</a> &mdash; email fleetlybots@gmail.com anytime.</li>
     </ul>
   </section>
 
@@ -325,7 +414,7 @@
 </main>
 <script>
 (function () {
-  /* Fleetly Coordinator template on Grok. Step 2 links here.
+  /* Fleetly bot template on Grok. Step 2 links here.
      The setup guide links to the same URL. */
   var GROK_BOT_TEMPLATE_URL = "https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7";
   var UPDATES_SENDER = "updates@fleetlybots.com";
@@ -340,7 +429,7 @@
       templateLink.target = "_blank";
       templateLink.rel = "noopener noreferrer";
       templateLink.style.color = "var(--blue)";
-      templateLink.textContent = "Open the Grok Bot template";
+      templateLink.textContent = "Add Fleetly to Grok Bot";
       templateSlot.appendChild(templateLink);
     } else {
       var templateBadge = document.createElement("span");
@@ -462,36 +551,25 @@
 
   function val(id) { return document.getElementById(id).value.trim(); }
 
-  var allowedEl = document.getElementById('allowed-emails');
-  var allowedWarn = document.getElementById('allowed-warn');
-  var allowedConfirmRow = document.getElementById('allowed-confirm-row');
-  var allowedConfirm = document.getElementById('allowed-confirm');
 
-  function allowedList() {
-    return allowedEl.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+
+  var tzSelect = document.getElementById('timezone');
+  if (tzSelect) {
+    try {
+      var detected = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      var tzFound = false;
+      for (var ti = 0; ti < tzSelect.options.length; ti++) { if (tzSelect.options[ti].value === detected) { tzFound = true; break; } }
+      if (tzFound) { tzSelect.value = detected; }
+      else if (detected) { var tzOpt = document.createElement('option'); tzOpt.value = detected; tzOpt.textContent = detected; tzSelect.appendChild(tzOpt); tzSelect.value = detected; }
+    } catch (e) {}
   }
-  function hasUpdatesSender(list) {
-    return list.some(function (a) { return a.toLowerCase() === UPDATES_SENDER; });
-  }
-  function normalizedAllowed(list) {
-    var out = [];
-    var seen = false;
-    list.forEach(function (a) {
-      if (a.toLowerCase() === UPDATES_SENDER) {
-        if (!seen) { out.push(UPDATES_SENDER); seen = true; }
-      } else {
-        out.push(a);
-      }
+  document.querySelectorAll('input[name="field-ai"]').forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      var row = cb.closest('.ai-row');
+      var purp = row ? row.querySelector('.ai-purpose') : null;
+      if (purp) purp.style.display = cb.checked ? 'block' : 'none';
     });
-    return out;
-  }
-  function syncAllowedWarning() {
-    var missing = !hasUpdatesSender(allowedList());
-    allowedWarn.classList.toggle('show', missing);
-    allowedConfirmRow.classList.toggle('show', missing);
-    if (!missing) allowedConfirm.checked = false;
-  }
-  allowedEl.addEventListener('input', syncAllowedWarning);
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -504,6 +582,24 @@
     }
     licenseErr.classList.remove('show');
 
+    var nameErr = document.getElementById('name-err');
+    if (!val('name')) {
+      nameErr.classList.add('show');
+      document.getElementById('name').focus();
+      return;
+    }
+    nameErr.classList.remove('show');
+
+    var emailEl = document.getElementById('email');
+    var emailErr = document.getElementById('email-err');
+    var emailVal = emailEl.value.trim();
+    if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+      emailErr.classList.add('show');
+      emailEl.focus();
+      return;
+    }
+    emailErr.classList.remove('show');
+
     var otaEl = document.getElementById('ota-email');
     var otaErr = document.getElementById('ota-email-err');
     var otaEmail = otaEl.value.trim();
@@ -514,29 +610,24 @@
     }
     otaErr.classList.remove('show');
 
-    var allowed = normalizedAllowed(allowedList());
-    if (!hasUpdatesSender(allowed) && !allowedConfirm.checked) {
-      syncAllowedWarning();
-      allowedEl.focus();
-      return;
-    }
-
     var fieldAIs = Array.prototype.slice.call(document.querySelectorAll('input[name="field-ai"]:checked')).map(function (c) { return c.value; });
+    var allowed = [UPDATES_SENDER];
+    if (emailVal.toLowerCase() !== UPDATES_SENDER) allowed.push(emailVal);
     var lines = [
+      'connect Fleetly:',
       'FLEETLY SETUP',
       'Owner name: ' + val('name'),
-      'Email: ' + val('email'),
-      'Address: ' + val('address'),
-      'Phone: ' + val('phone'),
+      'Email: ' + emailVal,
       'License key: ' + key,
-      'Updates email: ' + otaEmail,
-      'Health check: ' + val('health-check'),
+      'Grok Bot Email Inbox: ' + otaEmail,
+      'Health check: ' + val('health-day') + ' ' + val('health-time'),
       'Allowed senders: ' + allowed.join(', '),
-      'Chief of Staff: ' + val('chief-name'),
+      'Coordinator name: ' + val('chief-name'),
       'Timezone: ' + val('timezone'),
-      'Field AIs: ' + fieldAIs.join(', '),
-      'Coordinator: Fleetly'
+      'Field AIs: ' + fieldAIs.join(', ')
     ];
+    var purposes = { 'Grok Bot': val('purpose-grok-bot'), 'Muse': val('purpose-muse'), 'Claude': val('purpose-claude'), 'ChatGPT': val('purpose-chatgpt') };
+    fieldAIs.forEach(function (ai) { if (purposes[ai]) lines.push(ai + ' is for: ' + purposes[ai]); });
 
     block.textContent = lines.join('\n');
     result.classList.add('show');
@@ -563,6 +654,15 @@
       document.body.removeChild(ta); done();
     }
   });
+  var wnChecks = document.querySelectorAll('.wn-check');
+  var wnLine = document.getElementById('wn-progress');
+  function renderWn() {
+    var n = 0;
+    wnChecks.forEach(function (c) { if (c.checked) n++; });
+    if (wnLine) wnLine.textContent = n + ' of ' + wnChecks.length + ' complete';
+  }
+  wnChecks.forEach(function (c) { c.addEventListener('change', renderWn); });
+  renderWn();
 })();
 </script>
 </body>
