@@ -353,6 +353,7 @@
           <input type="text" id="purpose-chatgpt" placeholder="What do you use it for?">
         </label>
       </div>
+      <p class="field-err" id="ai-err">Check at least one AI.</p>
     </fieldset>
 
 <fieldset>
@@ -604,6 +605,13 @@
     var otaErr = document.getElementById('ota-email-err');
     var otaEmail = otaEl.value.trim();
     if (!otaEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(otaEmail)) {
+      otaErr.textContent = 'Please enter a valid email address.';
+      otaErr.classList.add('show');
+      otaEl.focus();
+      return;
+    }
+    if (!otaEmail.toLowerCase().endsWith('@mail.grokbot.com')) {
+      otaErr.textContent = "Use your Fleetly bot's own Grok Bot inbox address (ends in @mail.grokbot.com).";
       otaErr.classList.add('show');
       otaEl.focus();
       return;
@@ -611,6 +619,13 @@
     otaErr.classList.remove('show');
 
     var fieldAIs = Array.prototype.slice.call(document.querySelectorAll('input[name="field-ai"]:checked')).map(function (c) { return c.value; });
+    var aiErr = document.getElementById('ai-err');
+    if (fieldAIs.length === 0) {
+      aiErr.classList.add('show');
+      document.querySelector('input[name="field-ai"]').focus();
+      return;
+    }
+    aiErr.classList.remove('show');
     var allowed = [UPDATES_SENDER];
     if (emailVal.toLowerCase() !== UPDATES_SENDER) allowed.push(emailVal);
     var lines = [
@@ -619,12 +634,12 @@
       'Owner name: ' + val('name'),
       'Email: ' + emailVal,
       'License key: ' + key,
-      'Grok Bot Email Inbox: ' + otaEmail,
+      'Fleetly bot email: ' + otaEmail,
       'Health check: ' + val('health-day') + ' ' + val('health-time'),
       'Allowed senders: ' + allowed.join(', '),
       'Coordinator name: ' + val('chief-name'),
       'Timezone: ' + val('timezone'),
-      'Field AIs: ' + fieldAIs.join(', ')
+      'AIs: ' + fieldAIs.join(', ')
     ];
     var purposes = { 'Grok Bot': val('purpose-grok-bot'), 'Muse': val('purpose-muse'), 'Claude': val('purpose-claude'), 'ChatGPT': val('purpose-chatgpt') };
     fieldAIs.forEach(function (ai) { if (purposes[ai]) lines.push(ai + ' is for: ' + purposes[ai]); });
