@@ -330,12 +330,6 @@
       <legend>Field AIs you plan to use</legend>
       <p class="hint" style="margin-top:0">Check the ones you plan to connect. After setup, say connect AI: to the Fleetly bot to connect each one.</p>
       <div class="ai-row">
-        <label><input type="checkbox" name="field-ai" value="Grok Bot"> Grok Bot</label>
-        <label class="ai-purpose" style="display:none">What is Grok Bot for?
-          <input type="text" id="purpose-grok-bot" placeholder="What do you use it for?">
-        </label>
-      </div>
-      <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
         <label class="ai-purpose" style="display:none">What is Muse for?
           <input type="text" id="purpose-muse" placeholder="What do you use it for?">
@@ -641,7 +635,7 @@
       'Timezone: ' + val('timezone'),
       'AIs: ' + fieldAIs.join(', ')
     ];
-    var purposes = { 'Grok Bot': val('purpose-grok-bot'), 'Muse': val('purpose-muse'), 'Claude': val('purpose-claude'), 'ChatGPT': val('purpose-chatgpt') };
+    var purposes = { 'Muse': val('purpose-muse'), 'Claude': val('purpose-claude'), 'ChatGPT': val('purpose-chatgpt') };
     fieldAIs.forEach(function (ai) { if (purposes[ai]) lines.push(ai + ' is for: ' + purposes[ai]); });
 
     block.textContent = lines.join('\n');
