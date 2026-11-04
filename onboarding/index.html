@@ -331,21 +331,12 @@
       <p class="hint" style="margin-top:0">Check the ones you plan to connect. After setup, say connect AI: to the Fleetly bot to connect each one.</p>
       <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
-        <label class="ai-purpose" style="display:none">What is Muse for?
-          <input type="text" id="purpose-muse" placeholder="What do you use it for?">
-        </label>
       </div>
       <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
-        <label class="ai-purpose" style="display:none">What is Claude for?
-          <input type="text" id="purpose-claude" placeholder="What do you use it for?">
-        </label>
       </div>
       <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
-        <label class="ai-purpose" style="display:none">What is ChatGPT for?
-          <input type="text" id="purpose-chatgpt" placeholder="What do you use it for?">
-        </label>
       </div>
       <p class="field-err" id="ai-err">Check at least one AI.</p>
     </fieldset>
@@ -558,14 +549,6 @@
       else if (detected) { var tzOpt = document.createElement('option'); tzOpt.value = detected; tzOpt.textContent = detected; tzSelect.appendChild(tzOpt); tzSelect.value = detected; }
     } catch (e) {}
   }
-  document.querySelectorAll('input[name="field-ai"]').forEach(function (cb) {
-    cb.addEventListener('change', function () {
-      var row = cb.closest('.ai-row');
-      var purp = row ? row.querySelector('.ai-purpose') : null;
-      if (purp) purp.style.display = cb.checked ? 'block' : 'none';
-    });
-  });
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var key = val('license').toUpperCase();
@@ -635,9 +618,6 @@
       'Timezone: ' + val('timezone'),
       'AIs: ' + fieldAIs.join(', ')
     ];
-    var purposes = { 'Muse': val('purpose-muse'), 'Claude': val('purpose-claude'), 'ChatGPT': val('purpose-chatgpt') };
-    fieldAIs.forEach(function (ai) { if (purposes[ai]) lines.push(ai + ' is for: ' + purposes[ai]); });
-
     block.textContent = lines.join('\n');
     result.classList.add('show');
     result.scrollIntoView({ behavior: 'smooth', block: 'start' });
