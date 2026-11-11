@@ -164,8 +164,15 @@
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
     <p class="sub2">Do these in order. Your progress is saved automatically.</p>
-    <p class="progress-line" id="progress-line">0 of 5 steps complete</p>
+    <p class="progress-line" id="progress-line">0 of 6 steps complete</p>
     <ol class="steps">
+      <li class="step" data-section="supervisor">
+        <button type="button" class="step-check" aria-label="Mark Have a Fleetly supervisor complete"></button>
+        <div class="step-body">
+          <strong class="step-title">Step 0: Have a Fleetly supervisor bot</strong>
+          <span class="desc">Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. It passes Fleetly work to the Fleetly bot. If you don't have one, create one from the Chief of Staff template first, then enter its name in Basic Setup below — it's required.</span>
+        </div>
+      </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
@@ -184,7 +191,7 @@
         <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 4: Add the Fleetly bot to Grok Bot</strong>
-          <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Chief of Staff. <span id="grok-template-slot"></span></span>
+          <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Fleetly supervisor. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
@@ -198,7 +205,7 @@
         <button type="button" class="step-check" aria-label="Mark Paste setup block complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 6: Paste the setup block</strong>
-          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into a Chief of Staff bot, then say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</span>
+          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into your Fleetly supervisor bot, then say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</span>
         </div>
       </li>
     </ol>
@@ -248,11 +255,12 @@
     </fieldset>
 
     <fieldset>
-      <legend>Coordinator name (optional)</legend>
-      <label for="chief-name">Coordinator name
-        <small>The name of your primary bot, if you have one. Leave blank to talk to Fleetly directly.</small>
+      <legend>Fleetly supervisor name</legend>
+      <label for="chief-name">Fleetly supervisor name <span class="req">*</span>
+        <small>Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. Required — every Fleetly install needs one. If you don't have one, create one from the Chief of Staff template first.</small>
       </label>
-      <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief">
+      <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief" required>
+      <p class="field-err" id="chief-name-err">Please enter your Fleetly supervisor's name.</p>
     </fieldset>
 
     <fieldset>
@@ -381,7 +389,7 @@
       <button class="copy-btn" id="copy-btn">Copy setup block</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 4), not into a Chief of Staff bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 4), not into your Fleetly supervisor bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
@@ -390,7 +398,7 @@
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> paste your setup block into the Fleetly bot&rsquo;s chat and say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Chief:</strong> (optional) say <code>connect Chief:</code> (alias: <code>chief setup:</code>) to the Fleetly bot.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect your Fleetly supervisor:</strong> say <code>connect supervisor:</code> (alias: <code>connect Chief:</code>) to the Fleetly bot.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> (alias: <code>email setup:</code>) in the Fleetly bot&rsquo;s chat for each AI in your fleet, and check each is marked Verified.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Check each AI:</strong> open a new chat with each AI and say <code>my tasks:</code>. If it lists your tasks, that AI is wired up.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet:</strong> say <code>help:</code> in the Fleetly bot&rsquo;s chat.</label></li>
@@ -453,7 +461,7 @@
 
   /* ---- Checklist progress (localStorage, per-device) ---- */
   var LS_KEY = 'fleetly-onboarding-progress-v2';
-  var COMPLETABLE = ['duplicate', 'notion', 'bot', 'basic', 'paste'];
+  var COMPLETABLE = ['supervisor', 'duplicate', 'notion', 'bot', 'basic', 'paste'];
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
     catch (e) { return {}; }
@@ -642,6 +650,15 @@
       return;
     }
     usernameErr.classList.remove('show');
+
+    var chiefEl = document.getElementById('chief-name');
+    var chiefErr = document.getElementById('chief-name-err');
+    if (!val('chief-name')) {
+      chiefErr.classList.add('show');
+      chiefEl.focus();
+      return;
+    }
+    chiefErr.classList.remove('show');
 
     var otaEl = document.getElementById('ota-email');
     var otaErr = document.getElementById('ota-email-err');
