@@ -67,8 +67,8 @@
                 background: var(--panel); padding: 1.25rem 1.25rem 1rem; }
   .block-wrap pre { font-family: "DM Mono", monospace; font-size: .85rem; white-space: pre-wrap;
                     word-break: break-word; margin: 0; }
-  .copy-btn { position: absolute; top: .75rem; right: .75rem; font-size: .85rem;
-              font-weight: 600; padding: .45rem .9rem; border-radius: .5rem;
+  .copy-btn { position: absolute; top: .75rem; right: .75rem; font-size: 1rem;
+              font-weight: 700; padding: .65rem 1.25rem; border-radius: .5rem;
               border: 1px solid var(--line); background: var(--paper); color: var(--ink);
               cursor: pointer; }
   .copy-btn:hover { border-color: var(--orange); }
@@ -164,35 +164,41 @@
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
     <p class="sub2">Do these in order. Your progress is saved automatically.</p>
-    <p class="progress-line" id="progress-line">0 of 4 steps complete</p>
+    <p class="progress-line" id="progress-line">0 of 5 steps complete</p>
     <ol class="steps">
-      <li class="step" data-section="notion">
-        <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
-        <div class="step-body">
-          <strong class="step-title">Step 0: Connect Notion</strong>
-          <span class="desc">Create a free Notion account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you don't have one. You'll duplicate the Fleetly Notion Template into it next.</span>
-          <span class="tip">Before the smoke test, connect Notion to the Fleetly bot as shown in the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
-        </div>
-      </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
-          <strong class="step-title">1. Duplicate the Fleetly Notion Template</strong>
-          <span class="desc">Sign in to Notion, click <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
+          <strong class="step-title">Step 1: Duplicate the Fleetly Notion Template</strong>
+          <span class="desc">Sign in to Notion (create a free account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you need one). Click <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
+        </div>
+      </li>
+      <li class="step" data-section="notion">
+        <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
+        <div class="step-body">
+          <strong class="step-title">Step 3: Connect Notion to the Fleetly bot</strong>
+          <span class="desc">In the Fleetly bot, connect the Notion plugin to Grok Bot, choose your duplicated Fleetly Notion Template page, and set each permission to <strong>Always available</strong>, not Ask. See the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
         </div>
       </li>
       <li class="step" data-section="bot">
         <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
         <div class="step-body">
-          <strong class="step-title">2. Add the Fleetly bot to Grok Bot</strong>
+          <strong class="step-title">Step 4: Add the Fleetly bot to Grok Bot</strong>
           <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Chief of Staff. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
-          <a href="#section-basic"><strong class="step-title">3. Basic Setup</strong></a>
+          <a href="#section-basic"><strong class="step-title">Step 5: Basic Setup</strong></a>
           <span class="desc">Your details for the Settings database. Generates the setup block you paste into Fleetly.</span>
+        </div>
+      </li>
+      <li class="step" data-section="paste">
+        <button type="button" class="step-check" aria-label="Mark Paste setup block complete"></button>
+        <div class="step-body">
+          <strong class="step-title">Step 6: Paste the setup block</strong>
+          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into a Chief of Staff bot, then say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</span>
         </div>
       </li>
     </ol>
@@ -203,14 +209,14 @@
   <form id="setup-form" novalidate>
     <div class="section-check-row">
       <button type="button" class="section-check" data-section="basic" aria-label="Mark Basic Setup complete"></button>
-      <h2 id="section-basic">Step 3: Basic Setup</h2>
+      <h2 id="section-basic">Step 5: Basic Setup</h2>
     </div>
     <fieldset>
       <legend>License key</legend>
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
       <input type="text" id="license" name="license" autocomplete="off" spellcheck="false"
              placeholder="FL-XXXXX-XXXXX" required>
-      <p class="key-where">Paste this key into the Fleetly Notion Template’s Settings database, in the License key field.</p>
+      <p class="key-where">Paste this key into the Fleetly Notion Template’s Settings database, in the License key field. (Setup Guide step 2.)</p>
       <p class="hint">It is in your purchase receipt email and looks like FL- followed by two groups of 5 letters or numbers.</p>
       <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
       <p class="field-ok" id="license-ok">&#10003; Key format looks good.</p>
@@ -228,6 +234,17 @@
       </label>
       <input type="email" id="email" name="email" autocomplete="email" required>
       <p class="field-err" id="email-err">Please enter a valid email address.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Username</legend>
+      <label for="username">Username <span class="req">*</span>
+        <small>Lowercase letters, numbers and hyphens only — no spaces or capitals. Fleetly names each AI’s email inbox from your username, e.g. yourname-claude@agentmail.to.</small>
+      </label>
+      <input type="text" id="username" name="username" autocomplete="off" spellcheck="false"
+             placeholder="yourname" required>
+      <p class="field-err" id="username-err">Use lowercase letters, numbers and hyphens only — no spaces or capitals.</p>
+      <p class="field-ok" id="username-ok">&#10003; Username looks good.</p>
     </fieldset>
 
     <fieldset>
@@ -341,6 +358,15 @@
       <p class="field-err" id="ai-err">Check at least one AI.</p>
     </fieldset>
 
+    <fieldset>
+      <legend>How many AIs to start with</legend>
+      <p class="hint" style="margin-top:0">One AI first is the default. You can add the others anytime with connect AI:.</p>
+      <div class="radios">
+        <label class="radio-card"><input type="radio" name="setup-mode" value="one" checked> Start with Claude <small>One AI first, add more later</small></label>
+        <label class="radio-card"><input type="radio" name="setup-mode" value="all"> Set up all 3 now <small>Claude, ChatGPT and Muse</small></label>
+      </div>
+    </fieldset>
+
 <fieldset>
       <legend>Email Fleetly accepts</legend>
       <p style="margin:0">Fleetly accepts mail from you and Fleetly updates. Add other addresses later in Settings. Your AIs are added when you connect them.</p>
@@ -352,10 +378,10 @@
   <div id="result">
     <h2 style="font-size:1.35rem; letter-spacing:-.02em;">Your setup block — Fleetly bot only</h2>
     <div class="block-wrap">
-      <button class="copy-btn" id="copy-btn">Copy</button>
+      <button class="copy-btn" id="copy-btn">Copy setup block</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 2), not into a Chief of Staff bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 4), not into a Chief of Staff bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
@@ -363,11 +389,11 @@
 <p class="progress-line" id="wn-progress">0 of 6 complete</p>
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> paste your setup block into the Fleetly bot&rsquo;s chat and say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Notion</strong> to the Fleetly bot, with permissions set as shown in the <a href="https://fleetlybots.com/setup">Setup Guide</a>.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Chief:</strong> (optional) say <code>connect Chief:</code> to the Fleetly bot.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> for each AI, and check each is marked Verified.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet</strong> with <code>help:</code>.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Chief:</strong> (optional) say <code>connect Chief:</code> (alias: <code>chief setup:</code>) to the Fleetly bot.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> (alias: <code>email setup:</code>) in the Fleetly bot&rsquo;s chat for each AI in your fleet, and check each is marked Verified.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Check each AI:</strong> open a new chat with each AI and say <code>my tasks:</code>. If it lists your tasks, that AI is wired up.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet:</strong> say <code>help:</code> in the Fleetly bot&rsquo;s chat.</label></li>
     </ul>
     <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
   </section>
@@ -426,8 +452,8 @@
   }
 
   /* ---- Checklist progress (localStorage, per-device) ---- */
-  var LS_KEY = 'fleetly-onboarding-progress';
-  var COMPLETABLE = ['notion', 'duplicate', 'bot', 'basic'];
+  var LS_KEY = 'fleetly-onboarding-progress-v2';
+  var COMPLETABLE = ['duplicate', 'notion', 'bot', 'basic', 'paste'];
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
     catch (e) { return {}; }
@@ -486,6 +512,7 @@
 
   /* ---- Section 1 form ---- */
   var KEY_RE = /^FL-[A-HJ-NP-Z2-9]{5}-[A-HJ-NP-Z2-9]{5}$/i;
+  var USERNAME_RE = /^[a-z0-9-]+$/;
   var form = document.getElementById('setup-form');
   var licenseEl = document.getElementById('license');
   var licenseErr = document.getElementById('license-err');
@@ -535,6 +562,36 @@
     licenseOk.classList.remove('show');
   });
 
+  /* Username: lowercase letters, numbers and hyphens only — no spaces
+     or capitals — because it names the AI inboxes (item 5). Shown inline,
+     on blur and on submit; never auto-lowercased, so bad input errors. */
+  var usernameEl = document.getElementById('username');
+  var usernameErr = document.getElementById('username-err');
+  var usernameOk = document.getElementById('username-ok');
+  function checkUsername() {
+    var u = usernameEl.value.trim();
+    if (!u) {
+      usernameErr.classList.remove('show');
+      usernameOk.classList.remove('show');
+      return false;
+    }
+    if (USERNAME_RE.test(u)) {
+      usernameErr.classList.remove('show');
+      usernameOk.classList.add('show');
+      return true;
+    }
+    usernameOk.classList.remove('show');
+    usernameErr.classList.add('show');
+    return false;
+  }
+  usernameEl.addEventListener('blur', function () {
+    usernameEl.value = usernameEl.value.trim();
+    checkUsername();
+  });
+  usernameEl.addEventListener('input', function () {
+    usernameOk.classList.remove('show');
+  });
+
   function val(id) { return document.getElementById(id).value.trim(); }
 
 
@@ -578,6 +635,14 @@
     }
     emailErr.classList.remove('show');
 
+    var usernameVal = val('username');
+    if (!usernameVal || !USERNAME_RE.test(usernameVal)) {
+      usernameErr.classList.add('show');
+      document.getElementById('username').focus();
+      return;
+    }
+    usernameErr.classList.remove('show');
+
     var otaEl = document.getElementById('ota-email');
     var otaErr = document.getElementById('ota-email-err');
     var otaEmail = otaEl.value.trim();
@@ -603,12 +668,16 @@
       return;
     }
     aiErr.classList.remove('show');
+    var setupMode = 'One first';
+    var modeEl = document.querySelector('input[name="setup-mode"]:checked');
+    if (modeEl && modeEl.value === 'all') setupMode = 'All 3';
     var allowed = [UPDATES_SENDER];
     if (emailVal.toLowerCase() !== UPDATES_SENDER) allowed.push(emailVal);
     var lines = [
       'connect Fleetly:',
       'FLEETLY SETUP',
       'Owner name: ' + val('name'),
+      'Username: ' + usernameVal,
       'Email: ' + emailVal,
       'License key: ' + key,
       'Fleetly bot email: ' + otaEmail,
@@ -616,12 +685,13 @@
       'Allowed senders: ' + allowed.join(', '),
       'Coordinator name: ' + val('chief-name'),
       'Timezone: ' + val('timezone'),
-      'AIs: ' + fieldAIs.join(', ')
+      'AIs: ' + fieldAIs.join(', '),
+      'Setup mode: ' + setupMode
     ];
     block.textContent = lines.join('\n');
     result.classList.add('show');
     result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    copyBtn.textContent = 'Copy';
+    copyBtn.textContent = 'Copy setup block';
     /* Mark checklist sections complete */
     setSection('basic', true);
   });
@@ -630,7 +700,7 @@
     var text = block.textContent;
     function done() {
       copyBtn.textContent = 'Copied!';
-      setTimeout(function () { copyBtn.textContent = 'Copy'; }, 2000);
+      setTimeout(function () { copyBtn.textContent = 'Copy setup block'; }, 2000);
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(text).then(done, function () { fallback(); });
