@@ -144,6 +144,12 @@
          padding: .55rem .7rem; border-radius: .5rem; background: var(--orange-soft); font-weight: 600; }
   .key-where { font-weight: 700; margin: .15rem 0 .35rem; }
   .field-warn { color: var(--err); font-size: .85rem; font-weight: 600; margin: .45rem 0 0; display: none; }
+  .suffix-input { display: flex; align-items: center; gap: .45rem; }
+  .suffix-input input { flex: 1; min-width: 0; }
+  .suffix-input .suffix { font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .claim-script { font-family: "DM Mono", ui-monospace, monospace; font-size: .88rem;
+                  background: var(--paper); border: 1px solid var(--line); border-radius: .5rem;
+                  padding: .6rem .8rem; margin: .5rem 0 0; }
   .field-warn.show { display: block; }
   .confirm-remove { display: none; align-items: flex-start; gap: .6rem; font-weight: 600;
                     margin-top: .7rem; }
@@ -205,7 +211,7 @@
         <button type="button" class="step-check" aria-label="Mark Paste setup block complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 6: Paste the setup block</strong>
-          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into your Fleetly supervisor bot, then say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</span>
+          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into your Fleetly supervisor bot. The block’s first line is <code>connect Fleetly:</code>, so pasting it starts setup.</span>
         </div>
       </li>
     </ol>
@@ -236,7 +242,7 @@
       </label>
       <input type="text" id="name" name="name" autocomplete="name" required>
       <p class="field-err" id="name-err">Please enter your name.</p>
-      <label for="email">Email <span class="req">*</span>
+      <label for="email">Owner&rsquo;s email <span class="req">*</span>
         <small>Where Fleetly sends you notices.</small>
       </label>
       <input type="email" id="email" name="email" autocomplete="email" required>
@@ -244,31 +250,38 @@
     </fieldset>
 
     <fieldset>
-      <legend>Username</legend>
-      <label for="username">Username <span class="req">*</span>
-        <small>Lowercase letters, numbers and hyphens only — no spaces or capitals. Fleetly names each AI’s email inbox from your username, e.g. yourname-claude@agentmail.to.</small>
-      </label>
-      <input type="text" id="username" name="username" autocomplete="off" spellcheck="false"
-             placeholder="yourname" required>
-      <p class="field-err" id="username-err">Use lowercase letters, numbers and hyphens only — no spaces or capitals.</p>
-      <p class="field-ok" id="username-ok">&#10003; Username looks good.</p>
-    </fieldset>
-
-    <fieldset>
       <legend>Fleetly supervisor name</legend>
       <label for="chief-name">Fleetly supervisor name <span class="req">*</span>
         <small>Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. Required — every Fleetly install needs one. If you don't have one, create one from the Chief of Staff template first.</small>
       </label>
-      <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief" required>
+      <input type="text" id="chief-name" name="chief-name" autocomplete="off" placeholder="e.g. Chief of Staff" required>
       <p class="field-err" id="chief-name-err">Please enter your Fleetly supervisor's name.</p>
     </fieldset>
 
     <fieldset>
-      <legend>Grok Bot Email Inbox</legend>
-      <p class="hint" style="margin-top:0">Fleetly updates and done notes arrive here. Don&rsquo;t have one yet? In Grok Bot, say: Claim an email inbox for me, and paste the address it gives you.</p>
-      <label for="ota-email">Your Fleetly bot&rsquo;s Grok Bot email address <span class="req">*</span></label>
-      <input type="email" id="ota-email" placeholder="you@mail.grokbot.com" autocomplete="off" required>
-      <p class="field-err" id="ota-email-err">Please enter a valid email address.</p>
+      <legend>Your AIs&rsquo; Email Inboxes</legend>
+      <p class="hint" style="margin-top:0">One address is shared by all of your bots. Fleetly updates and done notes arrive here.</p>
+      <label for="grok-username">Your Grok Bot email address <span class="req">*</span>
+        <small>Enter only the part before the @ — lowercase letters, numbers, hyphens, and plus-tags allowed (e.g. fleetly or fleetly+v16test). The @mail.grokbot.com suffix is fixed.</small>
+      </label>
+      <div class="suffix-input">
+        <input type="text" id="grok-username" name="grok-username" autocomplete="off" spellcheck="false"
+               placeholder="fleetly" required>
+        <span class="suffix" aria-hidden="true">@mail.grokbot.com</span>
+      </div>
+      <p class="field-err" id="grok-username-err">Enter only the part before the @ — lowercase letters, numbers, hyphens and plus-tags only. No @ and no domain.</p>
+      <p class="field-ok" id="grok-username-ok">&#10003; Grok Bot address looks good.</p>
+      <p class="hint">Don&rsquo;t have one yet? Paste this into your Fleetly supervisor bot&rsquo;s chat:</p>
+      <p class="claim-script">Claim an email inbox for me and tell me the address.</p>
+      <p class="hint">Then enter only the part before the @ into the field above.</p>
+      <label for="username">AI Fleet username for inboxes <span class="req">*</span>
+        <small>Lowercase letters, numbers and hyphens only — no spaces or capitals. Fleetly names each AI&rsquo;s email inbox from your username.</small>
+      </label>
+      <input type="text" id="username" name="username" autocomplete="off" spellcheck="false"
+             placeholder="username" required>
+      <p class="hint">Ex: username-claude@agentmail.to / username-chatgpt@agentmail.to / username-muse@agentmail.to</p>
+      <p class="field-err" id="username-err">Use lowercase letters, numbers and hyphens only — no spaces or capitals.</p>
+      <p class="field-ok" id="username-ok">&#10003; Username looks good.</p>
     </fieldset>
 
     <fieldset>
@@ -352,8 +365,8 @@
     </fieldset>
 
     <fieldset>
-      <legend>Field AIs you plan to use</legend>
-      <p class="hint" style="margin-top:0">Check the ones you plan to connect. After setup, say connect AI: to the Fleetly bot to connect each one.</p>
+      <legend>Which AIs are you connecting now? (You can add more later.)</legend>
+      <p class="hint" style="margin-top:0">Check the ones you are connecting now. You can add more later — say <code>connect AI:</code> to the Fleetly bot for each one.</p>
       <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
       </div>
@@ -364,15 +377,6 @@
         <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
       </div>
       <p class="field-err" id="ai-err">Check at least one AI.</p>
-    </fieldset>
-
-    <fieldset>
-      <legend>How many AIs to start with</legend>
-      <p class="hint" style="margin-top:0">One AI first is the default. You can add the others anytime with connect AI:.</p>
-      <div class="radios">
-        <label class="radio-card"><input type="radio" name="setup-mode" value="one" checked> Start with Claude <small>One AI first, add more later</small></label>
-        <label class="radio-card"><input type="radio" name="setup-mode" value="all"> Set up all 3 now <small>Claude, ChatGPT and Muse</small></label>
-      </div>
     </fieldset>
 
 <fieldset>
@@ -396,8 +400,8 @@
     <h2>What happens next</h2>
 <p class="progress-line" id="wn-progress">0 of 6 complete</p>
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> paste your setup block into the Fleetly bot&rsquo;s chat and say <code>connect Fleetly:</code> (alias: <code>complete my setup</code>).</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> copy your setup block and paste it into the Fleetly bot&rsquo;s chat.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. After your first sample task finishes, the Fleetly bot says setup check passed and tells you to say <code>connect AI:</code> for one of the AIs you picked. Your AIs are checked later, when you connect each one.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect your Fleetly supervisor:</strong> say <code>connect supervisor:</code> (alias: <code>connect Chief:</code>) to the Fleetly bot.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> (alias: <code>email setup:</code>) in the Fleetly bot&rsquo;s chat for each AI in your fleet, and check each is marked Verified.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Check each AI:</strong> open a new chat with each AI and say <code>my tasks:</code>. If it lists your tasks, that AI is wired up.</label></li>
@@ -660,22 +664,42 @@
     }
     chiefErr.classList.remove('show');
 
-    var otaEl = document.getElementById('ota-email');
-    var otaErr = document.getElementById('ota-email-err');
-    var otaEmail = otaEl.value.trim();
-    if (!otaEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(otaEmail)) {
-      otaErr.textContent = 'Please enter a valid email address.';
-      otaErr.classList.add('show');
-      otaEl.focus();
+    /* Grok Bot username: only the part before the @ — lowercase letters,
+       numbers, hyphens, plus-tags (e.g. fleetly+v16test). Any @ or domain
+       is rejected, so typos like main.grokbot.com cannot be submitted. */
+    var grokEl = document.getElementById('grok-username');
+    var grokErr = document.getElementById('grok-username-err');
+    var grokOk = document.getElementById('grok-username-ok');
+    var GROK_RE = /^[a-z0-9][a-z0-9+\-]*$/;
+    function checkGrokUsername() {
+      var g = grokEl.value.trim();
+      if (!g) {
+        grokErr.classList.remove('show');
+        grokOk.classList.remove('show');
+        return false;
+      }
+      if (GROK_RE.test(g)) {
+        grokErr.classList.remove('show');
+        grokOk.classList.add('show');
+        return true;
+      }
+      grokOk.classList.remove('show');
+      grokErr.classList.add('show');
+      return false;
+    }
+    grokEl.addEventListener('blur', function () {
+      grokEl.value = grokEl.value.trim();
+      checkGrokUsername();
+    });
+    grokEl.addEventListener('input', function () {
+      grokOk.classList.remove('show');
+    });
+    var otaEmail = '';
+    if (!checkGrokUsername()) {
+      grokEl.focus();
       return;
     }
-    if (!otaEmail.toLowerCase().endsWith('@mail.grokbot.com')) {
-      otaErr.textContent = "Use your Fleetly bot's own Grok Bot inbox address (ends in @mail.grokbot.com).";
-      otaErr.classList.add('show');
-      otaEl.focus();
-      return;
-    }
-    otaErr.classList.remove('show');
+    otaEmail = grokEl.value.trim() + '@mail.grokbot.com';
 
     var fieldAIs = Array.prototype.slice.call(document.querySelectorAll('input[name="field-ai"]:checked')).map(function (c) { return c.value; });
     var aiErr = document.getElementById('ai-err');
@@ -685,9 +709,6 @@
       return;
     }
     aiErr.classList.remove('show');
-    var setupMode = 'One first';
-    var modeEl = document.querySelector('input[name="setup-mode"]:checked');
-    if (modeEl && modeEl.value === 'all') setupMode = 'All 3';
     var allowed = [UPDATES_SENDER];
     if (emailVal.toLowerCase() !== UPDATES_SENDER) allowed.push(emailVal);
     var lines = [
@@ -702,8 +723,7 @@
       'Allowed senders: ' + allowed.join(', '),
       'Fleetly supervisor name: ' + val('chief-name'),
       'Timezone: ' + val('timezone'),
-      'AIs: ' + fieldAIs.join(', '),
-      'Setup mode: ' + setupMode
+      'AIs: ' + fieldAIs.join(', ')
     ];
     block.textContent = lines.join('\n');
     result.classList.add('show');
