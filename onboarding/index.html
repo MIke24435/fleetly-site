@@ -176,21 +176,21 @@
         <button type="button" class="step-check" aria-label="Mark Have a Fleetly supervisor complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 0: Have a Fleetly supervisor bot</strong>
-          <span class="desc">Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. It passes Fleetly work to the Fleetly bot. If you don't have one, create one from the Chief of Staff template first, then enter its name in Basic Setup below — it's required.</span>
+          <span class="desc">Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. It passes Fleetly work to the Fleetly bot. If you don't have one, open [Chief of Staff template link], click Add to Grok Bot, give it a name, then enter its name in Basic Setup below — it's required.</span>
         </div>
       </li>
       <li class="step" data-section="duplicate">
         <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 1: Duplicate the Fleetly Notion Template</strong>
-          <span class="desc">Sign in to Notion (create a free account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you need one). Click <a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
+          <span class="desc">Sign in to Notion (create a free account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you need one). Click <a href="https://template.fleetlybots.com" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
         </div>
       </li>
       <li class="step" data-section="notion">
         <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
         <div class="step-body">
           <strong class="step-title">Step 3: Connect Notion to the Fleetly bot</strong>
-          <span class="desc">In the Fleetly bot, connect the Notion plugin to Grok Bot, choose your duplicated Fleetly Notion Template page, and set each permission to <strong>Always available</strong>, not Ask. See the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
+          <span class="desc">In Grok Bot, add a Notion account named 'fleetly' pointing at the workspace with your Fleetly Notion Template copy, tell the Fleetly bot to use that account by name, choose the template page, and set each permission to <strong>Always available</strong>, not Ask. See the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
         </div>
       </li>
       <li class="step" data-section="bot">
@@ -229,7 +229,7 @@
       <label for="license">Your Fleetly license key <span class="req">*</span></label>
       <input type="text" id="license" name="license" autocomplete="off" spellcheck="false"
              placeholder="FL-XXXXX-XXXXX" required>
-      <p class="key-where">Paste this key into the Fleetly Notion Template’s Settings database, in the License key field. (Setup Guide step 2.)</p>
+      <p class="key-where">The Fleetly bot copies this key into your Settings database when you paste the setup block in Step 6. You do not paste it into Notion yourself.</p>
       <p class="hint">It is in your purchase receipt email and looks like FL- followed by two groups of 5 letters or numbers.</p>
       <p class="field-err" id="license-err">That doesn&rsquo;t look like a Fleetly key. It should look like FL-XXXXX-XXXXX.</p>
       <p class="field-ok" id="license-ok">&#10003; Key format looks good.</p>
@@ -368,13 +368,13 @@
       <legend>Which AIs are you connecting now? (You can add more later.)</legend>
       <p class="hint" style="margin-top:0">Check the ones you are connecting now. You can add more later — say <code>connect AI:</code> to the Fleetly bot for each one.</p>
       <div class="ai-row">
-        <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
-      </div>
-      <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
       </div>
       <div class="ai-row">
         <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
+      </div>
+      <div class="ai-row">
+        <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
       </div>
       <p class="field-err" id="ai-err">Check at least one AI.</p>
     </fieldset>
@@ -401,8 +401,8 @@
 <p class="progress-line" id="wn-progress">0 of 6 complete</p>
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> copy your setup block and paste it into the Fleetly bot&rsquo;s chat.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. After your first sample task finishes, the Fleetly bot says setup check passed and tells you to say <code>connect AI:</code> for one of the AIs you picked. Your AIs are checked later, when you connect each one.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect your Fleetly supervisor:</strong> say <code>connect supervisor:</code> (alias: <code>connect Chief:</code>) to the Fleetly bot.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. After your first sample task finishes, the Fleetly bot says setup check passed and tells you to say <code>connect AI:</code> for one of the AIs you picked. Your AIs are checked later, when you connect each one.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> (alias: <code>email setup:</code>) in the Fleetly bot&rsquo;s chat for each AI in your fleet, and check each is marked Verified.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Check each AI:</strong> open a new chat with each AI and say <code>my tasks:</code>. If it lists your tasks, that AI is wired up.</label></li>
       <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet:</strong> say <code>help:</code> in the Fleetly bot&rsquo;s chat.</label></li>
@@ -413,8 +413,8 @@
   <section class="what-next" aria-label="Key documents">
     <h2>Key documents</h2>
 <ul class="doc-links">
-      <li><a href="https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7">Add Fleetly to Grok Bot</a> &mdash; add the Fleetly bot to Grok Bot.</li>
-      <li><a href="https://tricky-yumberry-ecf.notion.site/Fleetly-Notion-Template-3f45be5f1956816d8c8ff957f0582009?source=copy_link">Open the Fleetly Notion Template</a> &mdash; duplicate this into your Notion to get started.</li>
+      <li><a href="https://bot.fleetlybots.com">Add Fleetly to Grok Bot</a> &mdash; add the Fleetly bot to Grok Bot.</li>
+      <li><a href="https://template.fleetlybots.com">Open the Fleetly Notion Template</a> &mdash; duplicate this into your Notion to get started.</li>
       <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; step-by-step help for every part of setup.</li>
       <li><strong>Fleet Help</strong> &mdash; quick start, every trigger, and common fixes, inside your duplicated Fleetly Notion Template.</li>
       <li><a href="https://agentmail.to/docs/get-started/agent-signup">AgentMail sign-up</a> &mdash; email inboxes for your AIs.</li>
@@ -440,7 +440,7 @@
 (function () {
   /* Fleetly bot template on Grok. Step 2 links here.
      The setup guide links to the same URL. */
-  var GROK_BOT_TEMPLATE_URL = "https://x.ai/bot/f59HF1xJ9uVAoi4Nx2sP7";
+  var GROK_BOT_TEMPLATE_URL = "https://bot.fleetlybots.com";
   var UPDATES_SENDER = "updates@fleetlybots.com";
 
   var templateSlot = document.getElementById("grok-template-slot");
