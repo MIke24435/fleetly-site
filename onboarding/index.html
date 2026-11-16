@@ -74,6 +74,7 @@
   .copy-btn:hover { border-color: var(--orange); }
   .next { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: .75rem;
           background: var(--orange-soft); border: 1px solid var(--orange); font-weight: 600; }
+  .next a { color: var(--blue); }
   footer { margin-top: 3rem; font-size: .85rem; color: var(--muted); text-align: center; }
   footer a { color: inherit; }
   /* Checklist hub */
@@ -124,6 +125,11 @@
                background: var(--panel); padding: 1.25rem 1.25rem 1rem; }
   .what-next h2 { font-size: 1.25rem; letter-spacing: -.02em; margin: 0 0 .75rem;
                   color: var(--orange); font-weight: 800; }
+  .what-next h3 { font-size: 1.1rem; letter-spacing: -.01em; margin: 1.25rem 0 .5rem;
+                  font-weight: 800; }
+  .what-next h3:first-of-type { margin-top: .25rem; }
+  .what-next p { font-size: .95rem; margin: .6rem 0; }
+  .what-next p a { color: var(--blue); }
   .what-next ol { margin: 0; padding-left: 1.25rem; display: grid; gap: .6rem; }
   .what-next li { font-size: .95rem; }
   .what-next .support { font-size: .9rem; color: var(--muted); margin: 1rem 0 0; }
@@ -165,53 +171,54 @@
 <main>
   <p class="kicker">Fleetly</p>
   <h1>Set up Fleetly</h1>
-  <p class="sub">Work through the checklist below. The last step builds a setup block that you paste into the Fleetly bot&rsquo;s chat.</p>
+  <p class="sub">Installing Fleetly has 2 parts. <strong>Part 1</strong> sets up your Fleetly bot (Grok Bot) &mdash; that is what this form is for. <strong>Part 2</strong> connects your AI fleet, and comes after Part 1.</p>
+  <p class="next"><strong>Before you start:</strong> have a Notion and an AgentMail account (about 10 minutes). Open the <a href="https://app.notion.com/p/41a5be5f195681e5bd6ad098f8c678a8">Setup Checklist</a>.</p>
 
   <section class="checklist" aria-label="Onboarding checklist">
     <h2>Your onboarding checklist</h2>
-    <p class="sub2">Do these in order. Your progress is saved automatically.</p>
+    <p class="sub2">Part 1 &mdash; set up your Fleetly bot (Grok Bot). Do these in order; step numbers match the Setup Guide. Your progress is saved automatically.</p>
     <p class="progress-line" id="progress-line">0 of 6 steps complete</p>
     <ol class="steps">
       <li class="step" data-section="supervisor">
         <button type="button" class="step-check" aria-label="Mark Have a Fleetly supervisor complete"></button>
         <div class="step-body">
-          <strong class="step-title">Step 0: Have a Fleetly supervisor bot</strong>
+          <strong class="step-title">[Browser: Grok Bot] Step 0: Have a Fleetly supervisor bot</strong>
           <span class="desc">Your Fleetly supervisor is the bot you give most of your requests to, usually your Chief of Staff. It passes Fleetly work to the Fleetly bot. If you don't have one, open [Chief of Staff template link], click Add to Grok Bot, give it a name, then enter its name in Basic Setup below — it's required.</span>
-        </div>
-      </li>
-      <li class="step" data-section="duplicate">
-        <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
-        <div class="step-body">
-          <strong class="step-title">Step 1: Duplicate the Fleetly Notion Template</strong>
-          <span class="desc">Sign in to Notion (create a free account at <a href="https://notion.so" style="color:var(--blue);">notion.so</a> if you need one). Click <a href="https://template.fleetlybots.com" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into your workspace. Come back here when you’re done.</span>
-        </div>
-      </li>
-      <li class="step" data-section="notion">
-        <button type="button" class="step-check" aria-label="Mark Connect Notion complete"></button>
-        <div class="step-body">
-          <strong class="step-title">Step 3: Connect Notion to the Fleetly bot</strong>
-          <span class="desc">In Grok Bot, add a Notion account named 'fleetly' pointing at the workspace with your Fleetly Notion Template copy, tell the Fleetly bot to use that account by name, choose the template page, and set each permission to <strong>Always available</strong>, not Ask. See the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
-        </div>
-      </li>
-      <li class="step" data-section="bot">
-        <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot complete"></button>
-        <div class="step-body">
-          <strong class="step-title">Step 4: Add the Fleetly bot to Grok Bot</strong>
-          <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Fleetly supervisor. <span id="grok-template-slot"></span></span>
         </div>
       </li>
       <li class="step" data-section="basic">
         <button type="button" class="step-check" aria-label="Mark Basic Setup complete"></button>
         <div class="step-body">
-          <a href="#section-basic"><strong class="step-title">Step 5: Basic Setup</strong></a>
-          <span class="desc">Your details for the Settings database. Generates the setup block you paste into Fleetly.</span>
+          <a href="#section-basic"><strong class="step-title">[This form] Step 5: Basic Setup</strong></a>
+          <span class="desc">Your details for the Settings database. Generates the setup block you paste into the Fleetly bot&rsquo;s chat.</span>
+        </div>
+      </li>
+      <li class="step" data-section="accounts">
+        <button type="button" class="step-check" aria-label="Mark Have Notion and AgentMail accounts complete"></button>
+        <div class="step-body">
+          <strong class="step-title">[Browser: Notion and AgentMail] Pre-onboarding: Have a Notion account and an AgentMail account</strong>
+          <span class="desc">Create free ones if you need them (about 10 minutes) &mdash; Notion at <a href="https://www.notion.so/signup" style="color:var(--blue);">notion.so/signup</a>, AgentMail at <a href="https://console.agentmail.to" style="color:var(--blue);">console.agentmail.to</a>. If you already have them, keep them.</span>
+        </div>
+      </li>
+      <li class="step" data-section="duplicate">
+        <button type="button" class="step-check" aria-label="Mark Duplicate Template complete"></button>
+        <div class="step-body">
+          <strong class="step-title">[Browser: Notion] Step 1: Duplicate the Fleetly Notion Template</strong>
+          <span class="desc">Sign in to Notion. Click <a href="https://template.fleetlybots.com" style="color:var(--blue);">Open the Fleetly Notion Template</a>, then choose Duplicate (top right) to copy it into the workspace Muse can reach. Come back here when you&rsquo;re done.</span>
+        </div>
+      </li>
+      <li class="step" data-section="bot">
+        <button type="button" class="step-check" aria-label="Mark Add Fleetly Bot and Connect Notion complete"></button>
+        <div class="step-body">
+          <strong class="step-title">[Browser: Grok Bot] Steps 3&ndash;4: Add the Fleetly bot and connect Notion</strong>
+          <span class="desc">Add the Fleetly bot to your Grok account. The Fleetly bot runs your fleet and reports to your Fleetly supervisor. <span id="grok-template-slot"></span> Then, in Grok Bot, add a Notion account named &lsquo;fleetly&rsquo; pointing at the workspace with your Fleetly Notion Template copy, tell the Fleetly bot to use that account by name, choose the template page, and set each permission to <strong>Always available</strong>, not Ask. See the <a href="https://fleetlybots.com/setup" style="color:var(--blue);">Setup Guide</a>.</span>
         </div>
       </li>
       <li class="step" data-section="paste">
         <button type="button" class="step-check" aria-label="Mark Paste setup block complete"></button>
         <div class="step-body">
-          <strong class="step-title">Step 6: Paste the setup block</strong>
-          <span class="desc">Copy your setup block below and paste it into the Fleetly bot’s chat (the bot from Step 4), not into your Fleetly supervisor bot. The block’s first line is <code>connect Fleetly:</code>, so pasting it starts setup.</span>
+          <strong class="step-title">[Fleetly bot chat] Step 6: Paste the setup block</strong>
+          <span class="desc">Copy your setup block below and paste it into the Fleetly bot&rsquo;s chat (the bot from Steps 3&ndash;4), not into your Fleetly supervisor bot. The block&rsquo;s first line is <code>connect Fleetly:</code>, so pasting it starts setup.</span>
         </div>
       </li>
     </ol>
@@ -364,22 +371,9 @@
       </select>
     </fieldset>
 
-    <fieldset>
-      <legend>Which AIs are you connecting now? (You can add more later.)</legend>
-      <p class="hint" style="margin-top:0">Check the ones you are connecting now. You can add more later — say <code>connect AI:</code> to the Fleetly bot for each one.</p>
-      <div class="ai-row">
-        <label><input type="checkbox" name="field-ai" value="Claude"> Claude</label>
-      </div>
-      <div class="ai-row">
-        <label><input type="checkbox" name="field-ai" value="ChatGPT"> ChatGPT</label>
-      </div>
-      <div class="ai-row">
-        <label><input type="checkbox" name="field-ai" value="Muse"> Muse</label>
-      </div>
-      <p class="field-err" id="ai-err">Check at least one AI.</p>
-    </fieldset>
+    <p class="next">Adding an AI later: you can add an AI any time by typing <code>connect AI:</code> in the Fleetly bot&rsquo;s chat &mdash; no need to return to this form.</p>
 
-<fieldset>
+    <fieldset>
       <legend>Email Fleetly accepts</legend>
       <p style="margin:0">Fleetly accepts mail from you and Fleetly updates. Add other addresses later in Settings. Your AIs are added when you connect them.</p>
     </fieldset>
@@ -393,20 +387,30 @@
       <button class="copy-btn" id="copy-btn">Copy setup block</button>
       <pre id="setup-block"></pre>
     </div>
-    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Step 4), not into your Fleetly supervisor bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
+    <p class="next">Paste this into the Fleetly bot&rsquo;s chat (the bot from Steps 3&ndash;4), not into your Fleetly supervisor bot. The Fleetly bot will fill in your Settings and AI Fleet databases.</p>
   </div>
 
   <section class="what-next" aria-label="What happens next">
     <h2>What happens next</h2>
-<p class="progress-line" id="wn-progress">0 of 6 complete</p>
+<p class="progress-line" id="wn-progress">0 of 7 complete</p>
+    <h3>Part 1 &mdash; Set up your Fleetly bot</h3>
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect Fleetly:</strong> copy your setup block and paste it into the Fleetly bot&rsquo;s chat.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect your Fleetly supervisor:</strong> say <code>connect supervisor:</code> (alias: <code>connect Chief:</code>) to the Fleetly bot.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Smoke test:</strong> in the Fleetly bot&rsquo;s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. After your first sample task finishes, the Fleetly bot says setup check passed and tells you to say <code>connect AI:</code> for one of the AIs you picked. Your AIs are checked later, when you connect each one.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Connect AI:</strong> say <code>connect AI:</code> (alias: <code>email setup:</code>) in the Fleetly bot&rsquo;s chat for each AI in your fleet, and check each is marked Verified.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Check each AI:</strong> open a new chat with each AI and say <code>my tasks:</code>. If it lists your tasks, that AI is wired up.</label></li>
-      <li><label><input type="checkbox" class="wn-check"> <strong>Start using your fleet:</strong> say <code>help:</code> in the Fleetly bot&rsquo;s chat.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[Fleetly bot chat]</strong> <strong>Connect Fleetly:</strong> copy your setup block and paste it into the Fleetly bot&rsquo;s chat.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[Fleetly bot chat]</strong> <strong>Smoke test:</strong> type <code>my tasks:</code> in the Fleetly bot&rsquo;s chat. If it lists your tasks, Notion is wired up. After your first sample task finishes, the Fleetly bot says setup check passed and tells you to run <code>connect AI:</code> for your first AI.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[Fleetly bot chat]</strong> <strong>Connect your Fleetly supervisor:</strong> type <code>connect supervisor:</code> (alias: <code>connect Chief:</code>) in the Fleetly bot&rsquo;s chat.</label></li>
     </ul>
+    <h3>Part 2 &mdash; Connecting your AI Fleet</h3>
+    <p>Repeat these steps for each AI &mdash; Claude, ChatGPT, or Muse. Start with one AI (about 30&ndash;40 minutes). Add the others later, about 10&ndash;15 minutes each. Full steps are in <a href="https://app.notion.com/p/41a5be5f195681e5bd6ad098f8c678a8">Part 2 of the Setup Checklist</a>. Not sure where a command goes? See <a href="https://app.notion.com/p/41a5be5f195681a7ad96cd7fa47ec91f">Where do I type this?</a></p>
+    <p><code>connect AI:</code> checks your connections in 5 steps: (1) check Notion connection, (2) check AgentMail connection, (3) create the AI&rsquo;s inbox, (4) test both, (5) mark Verified. It shows &ldquo;Step x of 5&rdquo; as it goes. It also gives you the Fleetly instructions to paste for that AI &mdash; see <a href="https://app.notion.com/p/41a5be5f195681eab8e1e63f15fa924e">Add Fleetly instructions</a>.</p>
+    <ul style="list-style:none; margin:0; padding:0; display:grid; gap:.6rem;">
+      <li><label><input type="checkbox" class="wn-check"> <strong>[That AI&rsquo;s chat]</strong> Connect Notion and AgentMail using the <a href="https://app.notion.com/p/41a5be5f1956817aa632f83ead24df22">Connect Notion</a> and <a href="https://app.notion.com/p/41a5be5f1956819d830be0dc43a317d1">Connect AgentMail</a> help pages, and run each test inside that AI before leaving it.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[Fleetly bot chat]</strong> Type <code>connect AI:</code>. <strong>Don&rsquo;t type this in the AI you just connected.</strong></label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[That AI&rsquo;s chat &mdash; new chat]</strong> Type <code>my tasks:</code> and pick the first task.</label></li>
+      <li><label><input type="checkbox" class="wn-check"> <strong>[Fleetly bot chat]</strong> <strong>Start using your fleet:</strong> type <code>help:</code> in the Fleetly bot&rsquo;s chat.</label></li>
+    </ul>
+    <p>Batch by app: connect all your AIs first (the first step above, for each AI), then run <code>connect AI:</code> in the Fleetly bot&rsquo;s chat for each AI back to back, then do the final <code>my tasks:</code> check in a new chat with each AI.</p>
+    <p>Before you run <code>connect AI:</code>, connect each AI to Notion and AgentMail yourself using the help pages above. <code>connect AI:</code> only checks these connections; if one fails it stops and links the matching help page.</p>
+    <p>You can add an AI any time later by typing <code>connect AI:</code> in the Fleetly bot&rsquo;s chat, without returning to this form.</p>
     <p class="support">Stuck? Email <a href="mailto:fleetlybots@gmail.com">fleetlybots@gmail.com</a> and we&rsquo;ll sort it out.</p>
   </section>
 
@@ -416,6 +420,10 @@
       <li><a href="https://bot.fleetlybots.com">Add Fleetly to Grok Bot</a> &mdash; add the Fleetly bot to Grok Bot.</li>
       <li><a href="https://template.fleetlybots.com">Open the Fleetly Notion Template</a> &mdash; duplicate this into your Notion to get started.</li>
       <li><a href="https://fleetlybots.com/setup">Setup Guide</a> &mdash; step-by-step help for every part of setup.</li>
+      <li><a href="https://app.notion.com/p/41a5be5f195681e5bd6ad098f8c678a8">Setup Checklist</a> &mdash; Pre-onboarding, Part 1, and Part 2 for each AI.</li>
+      <li><a href="https://app.notion.com/p/41a5be5f195681a7ad96cd7fa47ec91f">Where do I type this?</a> &mdash; which app each command goes in.</li>
+      <li><a href="https://app.notion.com/p/41a5be5f1956817aa632f83ead24df22">Connect Notion</a> &mdash; connect an AI to Notion.</li>
+      <li><a href="https://app.notion.com/p/41a5be5f1956819d830be0dc43a317d1">Connect AgentMail</a> &mdash; connect an AI to AgentMail.</li>
       <li><strong>Fleet Help</strong> &mdash; quick start, every trigger, and common fixes, inside your duplicated Fleetly Notion Template.</li>
       <li><a href="https://agentmail.to/docs/get-started/agent-signup">AgentMail sign-up</a> &mdash; email inboxes for your AIs.</li>
       <li><a href="https://x.ai">Grok Bot</a> &mdash; where the Fleetly bot lives.</li>
@@ -465,7 +473,7 @@
 
   /* ---- Checklist progress (localStorage, per-device) ---- */
   var LS_KEY = 'fleetly-onboarding-progress-v2';
-  var COMPLETABLE = ['supervisor', 'duplicate', 'notion', 'bot', 'basic', 'paste'];
+  var COMPLETABLE = ['supervisor', 'accounts', 'duplicate', 'bot', 'basic', 'paste'];
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }
     catch (e) { return {}; }
@@ -701,14 +709,6 @@
     }
     otaEmail = grokEl.value.trim() + '@mail.grokbot.com';
 
-    var fieldAIs = Array.prototype.slice.call(document.querySelectorAll('input[name="field-ai"]:checked')).map(function (c) { return c.value; });
-    var aiErr = document.getElementById('ai-err');
-    if (fieldAIs.length === 0) {
-      aiErr.classList.add('show');
-      document.querySelector('input[name="field-ai"]').focus();
-      return;
-    }
-    aiErr.classList.remove('show');
     var allowed = [UPDATES_SENDER];
     if (emailVal.toLowerCase() !== UPDATES_SENDER) allowed.push(emailVal);
     var lines = [
@@ -722,8 +722,7 @@
       'Health check: ' + val('health-day') + ' ' + val('health-time'),
       'Allowed senders: ' + allowed.join(', '),
       'Fleetly supervisor name: ' + val('chief-name'),
-      'Timezone: ' + val('timezone'),
-      'AIs: ' + fieldAIs.join(', ')
+      'Timezone: ' + val('timezone')
     ];
     block.textContent = lines.join('\n');
     result.classList.add('show');
