@@ -297,7 +297,7 @@
       <legend>Your AIs&rsquo; Email Inboxes</legend>
       <p class="hint" style="margin-top:0">One address is shared by all of your bots. Fleetly updates and done notes arrive here.</p>
       <label for="grok-username">Your Grok Bot email address <span class="req">*</span>
-        <small>Enter only the part before the @ — lowercase letters, numbers, hyphens, and plus-tags allowed (e.g. fleetly or fleetly+v16test). The @mail.grokbot.com suffix is fixed.</small>
+        <small>Enter only the part before the @ — lowercase letters, numbers, hyphens, and plus-tags allowed (e.g. fleetly or fleetly+v16test). Capitals are converted to lowercase as you type. The @mail.grokbot.com suffix is fixed.</small>
       </label>
       <div class="suffix-input">
         <input type="text" id="grok-username" name="grok-username" autocomplete="off" spellcheck="false"
@@ -310,12 +310,12 @@
       <p class="claim-script">Claim an email inbox for me and tell me the address.</p>
       <p class="hint">Then enter only the part before the @ into the field above.</p>
       <label for="username">AI Fleet username for inboxes <span class="req">*</span>
-        <small>Lowercase letters, numbers and hyphens only — no spaces or capitals. Fleetly names each AI&rsquo;s email inbox from your username.</small>
+        <small>Lowercase letters, numbers and hyphens only — no spaces. Capitals are converted to lowercase as you type. Fleetly names each AI&rsquo;s email inbox from your username.</small>
       </label>
       <input type="text" id="username" name="username" autocomplete="off" spellcheck="false"
              placeholder="username" required>
       <p class="hint">Ex: username-claude@agentmail.to / username-chatgpt@agentmail.to / username-muse@agentmail.to</p>
-      <p class="field-err" id="username-err">Use lowercase letters, numbers and hyphens only — no spaces or capitals.</p>
+      <p class="field-err" id="username-err">Use lowercase letters, numbers and hyphens only — no spaces.</p>
       <p class="field-ok" id="username-ok">&#10003; Username looks good.</p>
     </fieldset>
 
@@ -610,9 +610,10 @@
     licenseOk.classList.remove('show');
   });
 
-  /* Username: lowercase letters, numbers and hyphens only — no spaces
-     or capitals — because it names the AI inboxes (item 5). Shown inline,
-     on blur and on submit; never auto-lowercased, so bad input errors. */
+  /* Username: lowercase letters, numbers and hyphens only — no spaces —
+     because it names the AI inboxes (item 5). Shown inline, on blur and
+     on submit; capitals are auto-lowercased as the buyer types, so
+     capitalization alone never errors. */
   var usernameEl = document.getElementById('username');
   var usernameErr = document.getElementById('username-err');
   var usernameOk = document.getElementById('username-ok');
@@ -633,7 +634,7 @@
     return false;
   }
   usernameEl.addEventListener('blur', function () {
-    usernameEl.value = usernameEl.value.trim();
+    usernameEl.value = usernameEl.value.trim().toLowerCase();
     checkUsername();
   });
   usernameEl.addEventListener('input', function () {
@@ -641,6 +642,22 @@
   });
 
   function val(id) { return document.getElementById(id).value.trim(); }
+
+  /* Auto-lowercase (Task #161): the email and username fields convert
+     capitals to lowercase as the buyer types, so capitalization alone
+     never errors or blocks submission. The license key is unaffected
+     (it is uppercased separately). */
+  function autoLowercase(el) {
+    var v = el.value, l = v.toLowerCase();
+    if (v === l) return;
+    var s = el.selectionStart, e = el.selectionEnd;
+    el.value = l;
+    try { el.setSelectionRange(s, e); } catch (err) {}
+  }
+  ['email', 'username', 'grok-username'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', function () { autoLowercase(el); });
+  });
 
 
 
@@ -675,7 +692,8 @@
 
     var emailEl = document.getElementById('email');
     var emailErr = document.getElementById('email-err');
-    var emailVal = emailEl.value.trim();
+    var emailVal = emailEl.value.trim().toLowerCase();
+    emailEl.value = emailVal;
     if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       emailErr.classList.add('show');
       emailEl.focus();
@@ -683,7 +701,8 @@
     }
     emailErr.classList.remove('show');
 
-    var usernameVal = val('username');
+    var usernameVal = val('username').toLowerCase();
+    usernameEl.value = usernameVal;
     if (!usernameVal || !USERNAME_RE.test(usernameVal)) {
       usernameErr.classList.add('show');
       document.getElementById('username').focus();
@@ -724,13 +743,14 @@
       return false;
     }
     grokEl.addEventListener('blur', function () {
-      grokEl.value = grokEl.value.trim();
+      grokEl.value = grokEl.value.trim().toLowerCase();
       checkGrokUsername();
     });
     grokEl.addEventListener('input', function () {
       grokOk.classList.remove('show');
     });
     var otaEmail = '';
+    grokEl.value = grokEl.value.trim().toLowerCase();
     if (!checkGrokUsername()) {
       grokEl.focus();
       return;
