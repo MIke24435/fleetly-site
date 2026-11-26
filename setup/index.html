@@ -97,7 +97,21 @@
       In the Fleetly bot’s chat, say <code>my tasks:</code>. If it lists your tasks, Notion is wired up. Your AIs are checked later, when you connect each one.
       Say <code>help:</code> anytime to see what your AIs can do.
     </li>
+    <li>
+      <strong>8. Connect your Fleetly supervisor</strong>
+      In the Fleetly bot’s chat, type <code>connect supervisor:</code>. The Fleetly bot shows you the routing rule — copy it into your Fleetly supervisor bot’s chat, then ask it: Did you save the Fleetly routing rule?
+    </li>
+    <li>
+      <strong>9. Create the AgentMail inboxes</strong>
+      After Step 8, the Fleetly bot starts this step (or you can say you’re ready to create inboxes). Create one inbox per AI at <a href="https://console.agentmail.to">console.agentmail.to</a> — <code>username-chatgpt</code>, <code>username-muse</code>, and <code>username-claude</code>, using the username in your Settings. The Fleetly bot guides you, then saves the addresses. It does not create the inboxes itself.
+      If Muse needs an AgentMail API key, the bot walks you through creating one at console.agentmail.to with Send &amp; read mail access. Paste that key only into Muse → Settings → Secrets — never into chat, never into Notion, and never into Settings.
+    </li>
   </ol>
+
+  <h2>Part 2 — Connecting ChatGPT, Muse and Claude</h2>
+  <p>Connect one AI at a time, in this order: ChatGPT first, then Muse, then Claude. About 10 minutes per AI (connecting plus a first test task), plus a wait if a free AI hits its limit. The free Claude plan gives you a set amount of use every 5 hours, and connecting it uses quite a bit of that. If Claude says you’ve reached your limit, nothing is broken — come back after the time it shows and type <code>continue Claude</code> in the Fleetly bot’s chat. Full steps are in Part 2 of the <a href="https://onboarding.fleetlybots.com">onboarding form</a> and the Setup Checklist in your Fleetly Notion Template.</p>
+  <p>In short: connect that AI to Notion and AgentMail, then in the Fleetly bot’s chat type <code>connect AI: ChatGPT</code> (or Muse, or Claude). Don’t type that in the AI you just connected. Paste the Fleetly instructions the bot gives you into that AI’s settings, then run <code>my tasks:</code> in a new chat in that AI.</p>
+  <p>Adding an AI later: first connect that AI to Notion and AgentMail using its help pages. Then, in the Fleetly bot’s chat, type <code>connect AI:</code> followed by the AI’s name, for example <code>connect AI: Muse</code>. There’s no need to come back to the onboarding form.</p>
 
   <h2>Skills</h2>
   <p>Skills are plain-text rows in the Fleetly Notion Template’s <strong>Skills</strong> database. They are already in the copy you duplicated. The Fleetly bot reads those rows. There is no Fleet Skills database, no personalised Fleet Onboarding page, and no step that fetches skills from an API or a URL.</p>
